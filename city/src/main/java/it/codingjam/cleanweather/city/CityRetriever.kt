@@ -1,7 +1,8 @@
 package it.codingjam.cleanweather.city
 
 import com.codingjam.cleanweather.entities.City
-import com.squareup.moshi.Moshi
+import com.github.salomonbrys.kotson.fromJson
+import com.google.gson.Gson
 
 
 class CityJson(
@@ -11,14 +12,14 @@ class CityJson(
 )
 
 class CityRetriever {
-    private val moshi = Moshi.Builder().build().adapter(Array<CityJson>::class.java)
 
-    private val text by lazy {
-        CityRetriever::class.java.getResource("/cityList.json").readText()
+    private val allCities by lazy {
+        val text = CityRetriever::class.java.getResource("/cityList.json").readText()
+        Gson().fromJson<List<CityJson>>(text)
     }
 
     fun findCity(name: String): List<City> {
-        return moshi.fromJson(text)!!
+        return allCities
                 .filter { it.name == name }
                 .map { City(it.id, it.name, it.country) }
                 .toList()
