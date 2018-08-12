@@ -1,0 +1,14 @@
+apply plugin: 'kotlin'
+apply plugin: 'java-library'
+
+dependencies {
+    api project(':entities')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.squareup.moshi:moshi:1.6.0'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.willowtreeapps.assertk:assertk:0.10'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

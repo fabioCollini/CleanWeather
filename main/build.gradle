@@ -1,0 +1,24 @@
+apply plugin: 'kotlin'
+apply plugin: 'java-library'
+apply plugin: 'application'
+
+mainClassName = "it.codingjam.cleanweather.main.MainKt"
+
+dependencies {
+    api project(':api')
+    api project(':city')
+    api project(':weather')
+    api project(':domain')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.willowtreeapps.assertk:assertk:0.10'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

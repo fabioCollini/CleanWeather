@@ -1,0 +1,42 @@
+{
+  "coord": {
+    "lon": 11.25,
+    "lat": 43.77
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 303.15,
+    "pressure": 1015,
+    "humidity": 58,
+    "temp_min": 303.15,
+    "temp_max": 303.15
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.5,
+    "deg": 110
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1533631800,
+  "sys": {
+    "type": 1,
+    "id": 5861,
+    "message": 0.0092,
+    "country": "IT",
+    "sunrise": 1533615032,
+    "sunset": 1533666612
+  },
+  "id": 3176959,
+  "name": "Firenze",
+  "cod": 200
+}
