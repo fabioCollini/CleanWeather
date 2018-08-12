@@ -5,4 +5,6 @@ data class City(
         val name: String,
         val country: String,
         val population: Int
-)
+) {
+    override fun toString() = "$name ($country)"
+}

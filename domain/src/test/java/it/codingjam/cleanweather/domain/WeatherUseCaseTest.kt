@@ -31,10 +31,6 @@ class WeatherUseCaseTest {
 
         val cityData = runBlocking { useCase.getCityData("Firenze") }
 
-        assert(cityData).isEqualTo(
-                """Firenze - Italy
-                    |10º min 8º max 20º
-                """.trimMargin()
-        )
+        assert(cityData).isEqualTo("Firenze (Italy) - 10º min 8º max 20º")
     }
 }

@@ -33,7 +33,7 @@ class WeatherRepositoryTest {
 
         val weather = runBlocking { repository.getWeather(CITY_ID) }
 
-        assert(weather.currentTemperature).isEqualTo(20)
+        assert(weather.temperature).isEqualTo(20)
         assert(weather.forecastMin).isEqualTo(5)
         assert(weather.forecastMax).isEqualTo(35)
     }
