@@ -14,7 +14,7 @@ class CityJson(
 class CityRetriever {
 
     private val allCities by lazy {
-        val text = CityRetriever::class.java.getResource("/cityList.json").readText()
+        val text = javaClass.getResource("/cityList.json").readText()
         Gson().fromJson<List<CityJson>>(text)
     }
 
