@@ -1,11 +1,11 @@
 package it.codingjam.cleanweather.domain
 
 import it.codingjam.cleanweather.city.CityRetriever
-import it.codingjam.cleanweather.weather.WeatherRepository
+import it.codingjam.cleanweather.weather.TemperatureRepository
 
 class WeatherUseCase(
         private val cityRetriever: CityRetriever,
-        private val weatherRepository: WeatherRepository) {
+        private val repository: TemperatureRepository) {
 
     suspend fun getCityData(s: String): String {
         return try {
@@ -14,10 +14,10 @@ class WeatherUseCase(
             if (cities.isEmpty()) {
                 "No city found"
             } else {
-                cities.map { it to weatherRepository.getWeather(it.id) }
-                        .joinToString("\n") { (city, weather) ->
-                            "$city - $weather"
-                        }
+                cities.map { city ->
+                    val temperature = repository.getTemperature(city.id)
+                    "$city - $temperature"
+                }.joinToString("\n")
             }
         } catch (e: Exception) {
             "Error retrieving data: ${e.message}"

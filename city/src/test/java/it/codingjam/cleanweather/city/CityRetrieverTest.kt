@@ -8,6 +8,6 @@ import org.junit.Test
 class CityRetrieverTest {
     @Test fun loadCities() {
         val cities = CityRetriever().findCity("Firenze")
-        assert(cities).containsExactly(City(3176959, "Firenze", "IT", 371517))
+        assert(cities).containsExactly(City(3176959, "Firenze", "IT"))
     }
 }

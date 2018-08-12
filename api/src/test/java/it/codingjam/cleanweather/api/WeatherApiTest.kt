@@ -23,7 +23,7 @@ class WeatherApiTest {
             api.currentWeather(CITY_ID).await()
         }
 
-        assert(response.name).isEqualTo("Firenze")
+        assert(response.main.temp).isEqualTo(303.15f)
         assert(mockWebServer.takeRequest().path).isEqualTo(
                 "/weather?appid=$OPEN_WEATHER_APP_ID&units=metric&id=$CITY_ID")
     }
@@ -37,7 +37,7 @@ class WeatherApiTest {
         }
 
         assert(response.list).hasSize(40)
-        assert(response.list[0].weather[0].description).isEqualTo("light rain")
+        assert(response.list[0].main.temp).isEqualTo(308.52f)
         assert(mockWebServer.takeRequest().path).isEqualTo(
                 "/forecast?appid=$OPEN_WEATHER_APP_ID&units=metric&id=$CITY_ID")
     }
