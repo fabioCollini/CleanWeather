@@ -7,8 +7,6 @@ import com.codingjam.cleanweather.entities.Temperature
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import it.codingjam.cleanweather.city.CityRetriever
-import it.codingjam.cleanweather.weather.TemperatureRepository
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Test
 

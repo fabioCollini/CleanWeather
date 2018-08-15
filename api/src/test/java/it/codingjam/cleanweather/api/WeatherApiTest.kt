@@ -13,7 +13,7 @@ class WeatherApiTest {
     @get:Rule
     val mockWebServer = MockWebServerRule()
 
-    private var api: WeatherApi = RetrofitFactory.createService(mockWebServer.url)
+    private var api: WeatherApiSpec = RetrofitFactory.createService(mockWebServer.url)
 
     @Test
     fun shouldDownloadCurrentWeather() {

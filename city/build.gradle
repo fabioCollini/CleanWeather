@@ -2,7 +2,7 @@ apply plugin: 'kotlin'
 apply plugin: 'java-library'
 
 dependencies {
-    api project(':entities')
+    api project(':domain')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'

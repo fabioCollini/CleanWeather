@@ -1,4 +1,4 @@
-package it.codingjam.cleanweather.weather
+package it.codingjam.cleanweather.domain
 
 import com.codingjam.cleanweather.entities.Temperature
 

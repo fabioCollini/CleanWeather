@@ -2,6 +2,8 @@ apply plugin: 'kotlin'
 apply plugin: 'java-library'
 
 dependencies {
+    implementation project(':weather')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"

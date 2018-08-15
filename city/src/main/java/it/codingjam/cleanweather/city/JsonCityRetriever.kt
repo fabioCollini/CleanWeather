@@ -3,6 +3,7 @@ package it.codingjam.cleanweather.city
 import com.codingjam.cleanweather.entities.City
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
+import it.codingjam.cleanweather.domain.CityRetriever
 
 
 class CityJson(

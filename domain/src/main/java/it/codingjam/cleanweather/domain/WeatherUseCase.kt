@@ -1,7 +1,5 @@
 package it.codingjam.cleanweather.domain
 
-import it.codingjam.cleanweather.city.CityRetriever
-import it.codingjam.cleanweather.weather.TemperatureRepository
 
 class WeatherUseCase(
         private val cityRetriever: CityRetriever,
