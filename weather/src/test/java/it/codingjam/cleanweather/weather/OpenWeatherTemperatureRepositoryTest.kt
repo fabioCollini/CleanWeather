@@ -13,11 +13,11 @@ import org.junit.Test
 
 private const val CITY_ID = 123
 
-class TemperatureRepositoryTest {
+class OpenWeatherTemperatureRepositoryTest {
 
     private val api: WeatherApi = mockk()
 
-    private val repository = TemperatureRepository(api)
+    private val repository = OpenWeatherTemperatureRepository(api)
 
     @Test
     fun calculateTemperatureAfterDownloadWeatherAndForecast() {
