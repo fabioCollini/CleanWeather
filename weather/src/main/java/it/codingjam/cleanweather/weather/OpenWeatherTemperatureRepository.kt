@@ -3,7 +3,10 @@ package it.codingjam.cleanweather.weather
 import com.codingjam.cleanweather.entities.Temperature
 import it.codingjam.cleanweather.api.WeatherApi
 
-class OpenWeatherTemperatureRepository(private val api: WeatherApi) : TemperatureRepository {
+class OpenWeatherTemperatureRepository(
+        private val api: WeatherApi
+) : TemperatureRepository {
+
     override suspend fun getTemperature(cityId: Int): Temperature {
         val forecastDeferred = api.forecast(cityId)
         val weather = api.currentWeather(cityId).await()

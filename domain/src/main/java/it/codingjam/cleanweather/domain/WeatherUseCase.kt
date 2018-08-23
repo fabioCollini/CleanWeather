@@ -14,10 +14,9 @@ class WeatherUseCase(
             if (cities.isEmpty()) {
                 "No city found"
             } else {
-                cities.map { city ->
-                    val temperature = repository.getTemperature(city.id)
-                    "$city - $temperature"
-                }.joinToString("\n")
+                val city = cities.first()
+                val temperature = repository.getTemperature(city.id)
+                "$city - $temperature"
             }
         } catch (e: Exception) {
             "Error retrieving data: ${e.message}"
