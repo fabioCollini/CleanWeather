@@ -3,7 +3,7 @@ package it.codingjam.cleanweather.api
 import it.codingjam.cleanweather.weather.Forecast
 import it.codingjam.cleanweather.weather.TemperatureWrapper
 import it.codingjam.cleanweather.weather.WeatherApi
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 

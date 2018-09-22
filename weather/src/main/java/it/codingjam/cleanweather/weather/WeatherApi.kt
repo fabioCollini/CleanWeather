@@ -1,6 +1,6 @@
 package it.codingjam.cleanweather.weather
 
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 
 data class TemperatureResponse(val temp: Float, val temp_min: Float, val temp_max: Float)
 
