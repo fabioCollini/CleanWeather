@@ -7,7 +7,7 @@ import com.codingjam.cleanweather.entities.Temperature
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 private const val CITY_ID = 123

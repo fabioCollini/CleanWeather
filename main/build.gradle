@@ -17,8 +17,3 @@ dependencies {
 
 sourceCompatibility = "7"
 targetCompatibility = "7"
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}

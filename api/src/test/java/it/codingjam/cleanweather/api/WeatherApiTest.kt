@@ -3,7 +3,7 @@ package it.codingjam.cleanweather.api
 import assertk.assert
 import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 
