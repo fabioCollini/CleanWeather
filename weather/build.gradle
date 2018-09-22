@@ -4,19 +4,13 @@ apply plugin: 'java-library'
 dependencies {
     implementation project(':api')
     api project(':entities')
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.24.0"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.26.1-eap13"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.willowtreeapps.assertk:assertk:0.10'
-    testImplementation "io.mockk:mockk:1.8.6"
+    testImplementation "io.mockk:mockk:1.8.7"
 }
 
 sourceCompatibility = "7"
 targetCompatibility = "7"
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}

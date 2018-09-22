@@ -1,7 +1,7 @@
 package it.codingjam.cleanweather.api
 
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
@@ -9,7 +9,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitFactory {
-    inline fun <reified T> createService(baseUrl: String, debug: Boolean = false): T {
+    inline fun <reified T> createService(
+            baseUrl: String = "http://api.openweathermap.org/data/2.5/",
+            debug: Boolean = false): T {
         val httpClient = OkHttpClient.Builder()
 
         if (debug) {

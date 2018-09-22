@@ -1,6 +1,6 @@
 package it.codingjam.cleanweather.api
 
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 

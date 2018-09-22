@@ -9,7 +9,7 @@ import io.mockk.every
 import io.mockk.mockk
 import it.codingjam.cleanweather.city.CityRetriever
 import it.codingjam.cleanweather.weather.TemperatureRepository
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 private const val CITY_ID = 123

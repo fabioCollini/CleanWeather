@@ -7,8 +7,8 @@ import io.mockk.mockk
 import it.codingjam.cleanweather.api.Forecast
 import it.codingjam.cleanweather.api.TemperatureWrapper
 import it.codingjam.cleanweather.api.WeatherApi
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 private const val CITY_ID = 123
@@ -20,7 +20,7 @@ class OpenWeatherTemperatureRepositoryTest {
     private val repository = OpenWeatherTemperatureRepository(api)
 
     @Test
-    fun calculateTemperatureAfterDownloadWeatherAndForecast() {
+    fun calculateTemperatureAfterDownloadWeatherAndForecast() = runBlocking {
         every { api.currentWeather(CITY_ID) } returns async {
             TemperatureWrapper(20f, 6f, 25f)
         }
@@ -33,7 +33,7 @@ class OpenWeatherTemperatureRepositoryTest {
             )
         }
 
-        val temperature = runBlocking { repository.getTemperature(CITY_ID) }
+        val temperature = repository.getTemperature(CITY_ID)
 
         assert(temperature.current).isEqualTo(20)
         assert(temperature.forecastMin).isEqualTo(5)
