@@ -8,13 +8,8 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.willowtreeapps.assertk:assertk:0.10'
-    testImplementation "io.mockk:mockk:1.8.8.kotlin13"
+    testImplementation "io.mockk:mockk:1.8.13.kotlin13"
 }
 
 sourceCompatibility = "7"
 targetCompatibility = "7"
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
