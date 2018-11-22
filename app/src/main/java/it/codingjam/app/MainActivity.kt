@@ -2,8 +2,10 @@ package it.codingjam.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,16 +23,6 @@ class MainActivity : AppCompatActivity() {
         searchButton.setOnClickListener {
             viewModel.load(search.text.toString())
         }
-    }
-}
-
-inline fun <reified VM : ViewModel> viewModel(activity: androidx.fragment.app.FragmentActivity, crossinline factory: () -> VM): Lazy<VM> {
-    return lazy {
-        ViewModelProviders.of(activity, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return factory() as T
-            }
-        }).get(VM::class.java)
     }
 }
 
