@@ -3,12 +3,12 @@ apply plugin: 'java-library'
 
 dependencies {
     api project(':domain')
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.1-eap13"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.willowtreeapps.assertk:assertk:0.10'
-    testImplementation "io.mockk:mockk:1.8.8.kotlin13"
+    testImplementation "io.mockk:mockk:1.8.13.kotlin13"
 }
 
 sourceCompatibility = "7"
