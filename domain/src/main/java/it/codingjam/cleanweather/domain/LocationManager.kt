@@ -1,4 +1,4 @@
-package it.codingjam.cleanweather.position
+package it.codingjam.cleanweather.domain
 
 import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location

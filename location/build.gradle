@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    api project(':entities')
+    api project(':domain')
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

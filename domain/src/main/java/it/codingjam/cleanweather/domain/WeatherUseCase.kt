@@ -1,7 +1,5 @@
 package it.codingjam.cleanweather.domain
 
-import it.codingjam.cleanweather.position.LocationManager
-import it.codingjam.cleanweather.weather.TemperatureRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 

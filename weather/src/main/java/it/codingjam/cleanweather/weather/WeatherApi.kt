@@ -16,7 +16,7 @@ data class Forecast(val list: List<TemperatureWrapper>) {
 }
 
 interface WeatherApi {
-    fun currentWeather(id: Int): Deferred<TemperatureWrapper>
+    fun currentWeather(lat: Double, lon: Double): Deferred<TemperatureWrapper>
 
-    fun forecast(id: Int): Deferred<Forecast>
+    fun forecast(lat: Double, lon: Double): Deferred<Forecast>
 }

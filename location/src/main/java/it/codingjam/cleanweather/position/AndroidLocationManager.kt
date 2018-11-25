@@ -7,6 +7,7 @@ import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import it.codingjam.cleanweather.domain.LocationManager
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
