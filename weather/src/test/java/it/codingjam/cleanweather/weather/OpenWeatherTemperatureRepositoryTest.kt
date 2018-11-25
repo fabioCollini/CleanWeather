@@ -11,7 +11,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-private const val CITY_ID = 123
+private const val LAT = 123.0
+private const val LON = 456.0
 
 class OpenWeatherTemperatureRepositoryTest {
 
@@ -21,11 +22,11 @@ class OpenWeatherTemperatureRepositoryTest {
 
     @Test
     fun calculateTemperatureAfterDownloadWeatherAndForecast() = runBlocking {
-        every { api.currentWeather(CITY_ID) } returns async {
+        every { api.currentWeather(LAT, LON) } returns async {
             TemperatureWrapper(20f, 6f, 25f)
         }
 
-        every { api.forecast(CITY_ID) } returns async {
+        every { api.forecast(LAT, LON) } returns async {
             Forecast(
                     TemperatureWrapper(10f, 5f, 15f),
                     TemperatureWrapper(10f, 16f, 26f),
@@ -33,7 +34,7 @@ class OpenWeatherTemperatureRepositoryTest {
             )
         }
 
-        val temperature = repository.getTemperature(CITY_ID)
+        val temperature = repository.getTemperature(LAT, LON)
 
         assert(temperature.current).isEqualTo(20)
         assert(temperature.forecastMin).isEqualTo(5)

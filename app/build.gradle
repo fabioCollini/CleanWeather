@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "it.codingjam.app"
+        applicationId "it.codingjam.cleanweather.app"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -24,9 +24,9 @@ android {
 
 dependencies {
     implementation project(':api')
-    implementation project(':city')
     implementation project(':weather')
     implementation project(':domain')
+    implementation project(':location')
 
     implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'

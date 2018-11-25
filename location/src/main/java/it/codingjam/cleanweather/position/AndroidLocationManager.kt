@@ -1,0 +1,45 @@
+package it.codingjam.cleanweather.position
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Geocoder
+import com.codingjam.cleanweather.entities.City
+import com.codingjam.cleanweather.entities.Location
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
+
+class AndroidLocationManager(context: Context) : LocationManager {
+
+    private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+
+    private val geocoder = Geocoder(context, Locale.getDefault())
+
+    @SuppressLint("MissingPermission")
+    override suspend fun getLastLocation(): Location = suspendCoroutine { continuation ->
+        fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location == null)
+                        continuation.resumeWithException(Exception("Location not available"))
+                    else
+                        continuation.resume(Location(location.latitude, location.longitude))
+                }
+                .addOnFailureListener {
+                    continuation.resumeWithException(it)
+                }
+    }
+
+    override suspend fun getCities(location: Location): List<City> = suspendCoroutine { continuation ->
+        val addresses = geocoder.getFromLocation(location.lat, location.lon, 10)
+        continuation.resume(addresses
+                .filter { it.locality != null }
+                .map {
+                    City(it.locality, it.countryCode)
+                }
+        )
+    }
+}

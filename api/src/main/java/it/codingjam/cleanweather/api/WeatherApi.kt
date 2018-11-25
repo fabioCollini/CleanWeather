@@ -14,15 +14,15 @@ data class TemperatureWrapper(
 }
 
 data class Forecast(val list: List<TemperatureWrapper>) {
-    constructor(vararg items: TemperatureWrapper): this(listOf(*items))
+    constructor(vararg items: TemperatureWrapper) : this(listOf(*items))
 }
 
 const val OPEN_WEATHER_APP_ID = "90e68d358063403c485caacb28cd5727"
 
 interface WeatherApi {
     @GET("weather?appid=$OPEN_WEATHER_APP_ID&units=metric")
-    fun currentWeather(@Query("id") id: Int): Deferred<TemperatureWrapper>
+    fun currentWeather(@Query("lat") lat: Double, @Query("lon") lon: Double): Deferred<TemperatureWrapper>
 
     @GET("forecast?appid=$OPEN_WEATHER_APP_ID&units=metric")
-    fun forecast(@Query("id") id: Int): Deferred<Forecast>
+    fun forecast(@Query("lat") lat: Double, @Query("lon") lon: Double): Deferred<Forecast>
 }
