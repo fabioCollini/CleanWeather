@@ -11,7 +11,7 @@ class ApiModule {
     @Singleton
     @Provides
     fun provideWeatherApiSpec(): WeatherApiSpec =
-            RetrofitFactory.createService("http://api.openweathermap.org/data/2.5/")
+            RetrofitFactory.createService("https://api.openweathermap.org/data/2.5/")
 
     @Singleton
     @Provides

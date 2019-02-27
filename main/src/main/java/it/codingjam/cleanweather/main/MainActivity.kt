@@ -1,4 +1,4 @@
-package it.codingjam.cleanweather.app
+package it.codingjam.cleanweather.main
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.content.pm.PackageManager.PERMISSION_GRANTED

@@ -1,4 +1,4 @@
-package it.codingjam.cleanweather.app
+package it.codingjam.cleanweather.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

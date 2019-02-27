@@ -25,6 +25,7 @@ android {
 }
 
 dependencies {
+    implementation project(':main')
     implementation project(':api')
     implementation project(':weather')
     implementation project(':domain')
