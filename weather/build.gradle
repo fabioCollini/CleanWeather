@@ -4,7 +4,7 @@ apply plugin: 'java-library'
 dependencies {
     implementation project(':api')
     api project(':entities')
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     testImplementation 'junit:junit:4.12'
