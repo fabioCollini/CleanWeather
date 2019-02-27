@@ -2,8 +2,11 @@ package it.codingjam.cleanweather.domain
 
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class WeatherUseCase(
+@Singleton
+class WeatherUseCase @Inject constructor(
         private val locationManager: LocationManager,
         private val repository: TemperatureRepository) {
 

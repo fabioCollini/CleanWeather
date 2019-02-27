@@ -1,7 +1,7 @@
 package it.codingjam.cleanweather.position
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Application
 import android.location.Geocoder
 import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
@@ -9,12 +9,14 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import it.codingjam.cleanweather.domain.LocationManager
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-
-class AndroidLocationManager(context: Context) : LocationManager {
+@Singleton
+class AndroidLocationManager @Inject constructor(context: Application) : LocationManager {
 
     private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 

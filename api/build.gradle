@@ -1,8 +1,12 @@
 apply plugin: 'kotlin'
 apply plugin: 'java-library'
+apply plugin: 'kotlin-kapt'
 
 dependencies {
     implementation project(':weather')
+
+    implementation "com.google.dagger:dagger:2.19"
+    kapt "com.google.dagger:dagger-compiler:2.19"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.squareup.retrofit2:retrofit:2.4.0"

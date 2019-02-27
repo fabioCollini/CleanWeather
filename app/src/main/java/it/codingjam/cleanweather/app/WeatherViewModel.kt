@@ -1,19 +1,15 @@
 package it.codingjam.cleanweather.app
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import it.codingjam.cleanweather.api.RetrofitWeatherApi
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import it.codingjam.cleanweather.domain.WeatherUseCase
-import it.codingjam.cleanweather.position.AndroidLocationManager
-import it.codingjam.cleanweather.weather.OpenWeatherTemperatureRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val api = RetrofitWeatherApi()
-    private val weatherRepository = OpenWeatherTemperatureRepository(api)
-    private val positionManager = AndroidLocationManager(application)
-    private val useCase = WeatherUseCase(positionManager, weatherRepository)
+class WeatherViewModel @Inject constructor(
+        private val useCase: WeatherUseCase
+) : ViewModel() {
 
     val state = MutableLiveData<String>()
 

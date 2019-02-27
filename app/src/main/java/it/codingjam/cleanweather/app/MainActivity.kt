@@ -6,11 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
+import javax.inject.Provider
 
 private const val PERMISSIONS_REQUEST_LOCATION = 123
 
@@ -18,10 +17,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: WeatherViewModel
 
+    @Inject
+    lateinit var viewModelProvider: Provider<WeatherViewModel>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        DaggerAppComponent.builder().app(application).build().inject(this)
+
+        viewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>) = viewModelProvider.get() as T
+        }).get(WeatherViewModel::class.java)
 
         setContentView(R.layout.activity_main)
 

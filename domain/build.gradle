@@ -1,8 +1,13 @@
 apply plugin: 'kotlin'
 apply plugin: 'java-library'
+apply plugin: 'kotlin-kapt'
 
 dependencies {
     api project(':entities')
+
+    implementation "com.google.dagger:dagger:2.19"
+    kapt "com.google.dagger:dagger-compiler:2.19"
+
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
