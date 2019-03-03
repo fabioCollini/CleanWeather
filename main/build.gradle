@@ -24,10 +24,8 @@ android {
 }
 
 dependencies {
-    implementation project(':api')
-    implementation project(':weather')
-    implementation project(':domain')
-    implementation project(':location')
+    api project(':domain')
+    implementation project(':utils')
 
     implementation "com.google.dagger:dagger:2.19"
     kapt "com.google.dagger:dagger-compiler:2.19"

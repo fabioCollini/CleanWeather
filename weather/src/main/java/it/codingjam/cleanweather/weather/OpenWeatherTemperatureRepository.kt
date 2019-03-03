@@ -21,4 +21,16 @@ class OpenWeatherTemperatureRepository @Inject constructor(
                 temperatures.map { it.temp_max }.max()?.toInt()
         )
     }
+
+    override suspend fun getForecast(lat: Double, lon: Double): List<Temperature> {
+        val temperatures = api.forecast(lat, lon).await().list.map { it.main }
+
+        return temperatures.map {
+            Temperature(
+                    it.temp.toInt(),
+                    it.temp_min.toInt(),
+                    it.temp_max.toInt()
+            )
+        }
+    }
 }

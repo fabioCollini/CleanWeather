@@ -24,4 +24,16 @@ class WeatherUseCase @Inject constructor(
             "Error retrieving data: ${e.message}"
         }
     }
+
+    suspend fun getForecast(): String = coroutineScope {
+        try {
+            val location = locationManager.getLastLocation()
+
+            val temperature = repository.getForecast(location.lat, location.lon)
+
+            temperature.joinToString("\n")
+        } catch (e: Exception) {
+            "Error retrieving data: ${e.message}"
+        }
+    }
 }

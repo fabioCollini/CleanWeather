@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.lifecycle.*
+import it.codingjam.cleanweather.domain.DomainComponentProvider
+import it.codingjam.cleanweather.utils.observe
+import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -15,21 +17,31 @@ private const val PERMISSIONS_REQUEST_LOCATION = 123
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: WeatherViewModel
+    private val viewModel: WeatherViewModel by viewModel { viewModelProvider }
 
     @Inject
     lateinit var viewModelProvider: Provider<WeatherViewModel>
 
+    @Inject
+    lateinit var myMainSingleton: MyMainSingleton
+
+    @Inject
+    lateinit var mainNavigator: MainNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DaggerAppComponent.builder().app(application).build().inject(this)
-
-        viewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>) = viewModelProvider.get() as T
-        }).get(WeatherViewModel::class.java)
+        DaggerMainComponent.builder()
+                .domainComponent((application as DomainComponentProvider).domainComponent)
+                .mainDependencies((application as MainDependenciesProvider).mainDependencies)
+                .build()
+                .inject(this)
 
         setContentView(R.layout.activity_main)
+
+        root.setOnClickListener {
+            mainNavigator.openDetail(this)
+        }
 
         viewModel.state.observe(this) {
             result.text = it
@@ -61,6 +73,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T?) -> Unit) =
-        observe(owner, Observer { observer(it) })

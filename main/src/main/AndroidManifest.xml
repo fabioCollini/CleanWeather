@@ -1,1 +1,7 @@
-<manifest package="it.codingjam.cleanweather.main" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="it.codingjam.cleanweather.main">
+
+    <application>
+        <activity android:name=".MainActivity" />
+    </application>
+</manifest>
