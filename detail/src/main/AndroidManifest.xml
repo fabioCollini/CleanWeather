@@ -1,7 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.codingjam.cleanweather.detail" >
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="it.codingjam.cleanweather.detail">
 
-    <application>
+    <dist:module
+        dist:instant="false"
+        dist:onDemand="false"
+        dist:title="Detail">
+        <dist:fusing dist:include="true" />
+    </dist:module>
+
+    <application tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".DetailActivity" />
     </application>
 </manifest>

@@ -22,11 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dynamicFeatures = [':detail']
 }
 
 dependencies {
     implementation project(':main')
-    implementation project(':detail')
     implementation project(':api')
     implementation project(':weather')
     implementation project(':domain')
