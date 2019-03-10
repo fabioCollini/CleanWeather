@@ -1,39 +1,32 @@
 package it.codingjam.cleanweather.app
 
-import android.app.Application
-import dagger.BindsInstance
+import dagger.Binds
 import dagger.Component
 import dagger.Module
-import dagger.Provides
-import it.codingjam.cleanweather.api.ApiModule
-import it.codingjam.cleanweather.domain.DomainComponent
+import it.codingjam.cleanweather.domain.DomainDependencies
 import it.codingjam.cleanweather.main.MainDependencies
 import it.codingjam.cleanweather.main.MainNavigator
-import it.codingjam.cleanweather.position.LocationModule
-import it.codingjam.cleanweather.weather.WeatherModule
-import javax.inject.Singleton
+import it.codingjam.cleanweather.position.LocationComponent
+import it.codingjam.cleanweather.weather.WeatherComponent
+import javax.inject.Scope
+
+@Scope
+@Retention
+annotation class AppSingleton
 
 @Module
-class MainDependenciesModule {
-    @Provides
-    @Singleton
-    fun provideNavigator(): MainNavigator = MainNavigatorImpl()
+interface MainDependenciesModule {
+    @Binds
+    fun provideNavigator(impl: MainNavigatorImpl): MainNavigator
 }
 
 @Component(modules = [
-    MainDependenciesModule::class,
-    ApiModule::class,
-    LocationModule::class,
-    WeatherModule::class
+    MainDependenciesModule::class
 ])
-@Singleton
-interface AppComponent : DomainComponent, MainDependencies {
+@AppSingleton
+interface MainDependenciesImpl : MainDependencies
 
-    @Component.Builder
-    interface Builder {
-        fun build(): AppComponent
-
-        @BindsInstance
-        fun app(app: Application): Builder
-    }
-}
+class DomainDependenciesImpl(
+        private val locationComponent: LocationComponent,
+        private val weatherComponent: WeatherComponent
+) : DomainDependencies, LocationComponent by locationComponent, WeatherComponent by weatherComponent

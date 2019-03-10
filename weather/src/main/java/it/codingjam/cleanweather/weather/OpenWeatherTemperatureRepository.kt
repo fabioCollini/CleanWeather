@@ -3,9 +3,8 @@ package it.codingjam.cleanweather.weather
 import com.codingjam.cleanweather.entities.Temperature
 import it.codingjam.cleanweather.domain.TemperatureRepository
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@WeatherSingleton
 class OpenWeatherTemperatureRepository @Inject constructor(
         private val api: WeatherApi
 ) : TemperatureRepository {

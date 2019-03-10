@@ -1,19 +1,31 @@
 package it.codingjam.cleanweather.api
 
+import dagger.Component
 import dagger.Module
 import dagger.Provides
 import it.codingjam.cleanweather.weather.WeatherApi
-import javax.inject.Singleton
+import it.codingjam.cleanweather.weather.WeatherDependencies
+import javax.inject.Scope
+
+@Scope
+@Retention
+annotation class ApiSingleton
+
+@Component(modules = [ApiModule::class])
+@ApiSingleton
+interface ApiComponent : WeatherDependencies {
+    override val weatherApi: WeatherApi
+}
 
 @Module
 class ApiModule {
 
-    @Singleton
+    @ApiSingleton
     @Provides
     fun provideWeatherApiSpec(): WeatherApiSpec =
             RetrofitFactory.createService("https://api.openweathermap.org/data/2.5/")
 
-    @Singleton
+    @ApiSingleton
     @Provides
     fun provideWeatherApi(impl: RetrofitWeatherApi): WeatherApi = impl
 }

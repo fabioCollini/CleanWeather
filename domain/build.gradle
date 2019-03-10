@@ -1,6 +1,11 @@
 apply plugin: 'kotlin'
 apply plugin: 'java-library'
 apply plugin: 'kotlin-kapt'
+apply plugin: "kotlin-allopen"
+
+allOpen {
+    annotation("it.codingjam.cleanweather.domain.AllOpen")
+}
 
 dependencies {
     api project(':entities')
@@ -14,6 +19,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.willowtreeapps.assertk:assertk:0.10'
     testImplementation "io.mockk:mockk:1.8.13.kotlin13"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'build/generated/source/kapt/main'
+        }
+    }
 }
 
 sourceCompatibility = "7"

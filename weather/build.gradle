@@ -15,5 +15,14 @@ dependencies {
     testImplementation "io.mockk:mockk:1.8.13.kotlin13"
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'build/generated/source/kapt/main'
+        }
+    }
+}
+
 sourceCompatibility = "7"
 targetCompatibility = "7"

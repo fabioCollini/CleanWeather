@@ -3,5 +3,5 @@ package it.codingjam.cleanweather.domain
 import javax.inject.Scope
 
 @Scope
-@Retention(AnnotationRetention.RUNTIME)
+@Retention
 annotation class FeatureSingleton
