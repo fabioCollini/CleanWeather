@@ -7,6 +7,8 @@ import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -33,13 +35,11 @@ class AndroidLocationManager(context: Context) : LocationManager {
                 }
     }
 
-    override suspend fun getCities(location: Location): List<City> = suspendCoroutine { continuation ->
-        val addresses = geocoder.getFromLocation(location.lat, location.lon, 10)
-        continuation.resume(addresses
+    override suspend fun getCities(location: Location): List<City> = withContext(Dispatchers.IO) {
+        geocoder.getFromLocation(location.lat, location.lon, 10)
                 .filter { it.locality != null }
                 .map {
                     City(it.locality, it.countryCode)
                 }
-        )
     }
 }
