@@ -2,9 +2,9 @@ package it.codingjam.cleanweather.weather
 
 import com.codingjam.cleanweather.entities.Temperature
 import it.codingjam.cleanweather.domain.TemperatureRepository
-import javax.inject.Inject
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import javax.inject.Inject
 
 @WeatherSingleton
 class OpenWeatherTemperatureRepository @Inject constructor(
@@ -24,7 +24,7 @@ class OpenWeatherTemperatureRepository @Inject constructor(
     }
 
     override suspend fun getForecast(lat: Double, lon: Double): List<Temperature> {
-        val temperatures = api.forecast(lat, lon).await().list.map { it.main }
+        val temperatures = api.forecast(lat, lon).list.map { it.main }
 
         return temperatures.map {
             Temperature(
