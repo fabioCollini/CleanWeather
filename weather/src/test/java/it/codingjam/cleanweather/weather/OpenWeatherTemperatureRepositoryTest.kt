@@ -4,9 +4,6 @@ import assertk.assert
 import assertk.assertions.isEqualTo
 import io.mockk.coEvery
 import io.mockk.mockk
-import it.codingjam.cleanweather.api.Forecast
-import it.codingjam.cleanweather.api.TemperatureWrapper
-import it.codingjam.cleanweather.api.WeatherApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
