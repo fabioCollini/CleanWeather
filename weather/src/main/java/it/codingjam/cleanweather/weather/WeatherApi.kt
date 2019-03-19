@@ -1,7 +1,5 @@
 package it.codingjam.cleanweather.weather
 
-import kotlinx.coroutines.Deferred
-
 data class TemperatureResponse(val temp: Float, val temp_min: Float, val temp_max: Float)
 
 data class TemperatureWrapper(
@@ -16,7 +14,7 @@ data class Forecast(val list: List<TemperatureWrapper>) {
 }
 
 interface WeatherApi {
-    fun currentWeather(lat: Double, lon: Double): Deferred<TemperatureWrapper>
+    suspend fun currentWeather(lat: Double, lon: Double): TemperatureWrapper
 
-    fun forecast(lat: Double, lon: Double): Deferred<Forecast>
+    suspend fun forecast(lat: Double, lon: Double): Forecast
 }

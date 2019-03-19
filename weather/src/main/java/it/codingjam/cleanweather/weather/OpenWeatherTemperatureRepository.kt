@@ -1,10 +1,9 @@
 package it.codingjam.cleanweather.weather
 
 import com.codingjam.cleanweather.entities.Temperature
-import it.codingjam.cleanweather.api.WeatherApi
+import it.codingjam.cleanweather.domain.TemperatureRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import it.codingjam.cleanweather.domain.TemperatureRepository
 
 class OpenWeatherTemperatureRepository(
         private val api: WeatherApi

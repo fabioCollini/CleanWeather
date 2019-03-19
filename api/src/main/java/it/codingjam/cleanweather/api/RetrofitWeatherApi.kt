@@ -18,10 +18,9 @@ interface WeatherApiSpec {
 
 class RetrofitWeatherApi : WeatherApi {
 
-    private val api = RetrofitFactory.createService<WeatherApiSpec>(
-            "http://api.openweathermap.org/data/2.5/")
+    private val api = RetrofitFactory.createService<WeatherApiSpec>()
 
-    override fun currentWeather(lat: Double, lon: Double) = api.currentWeather(lat, lon)
+    override suspend fun currentWeather(lat: Double, lon: Double) = api.currentWeather(lat, lon)
 
-    override fun forecast(lat: Double, lon: Double) = api.forecast(lat, lon)
+    override suspend fun forecast(lat: Double, lon: Double) = api.forecast(lat, lon)
 }
