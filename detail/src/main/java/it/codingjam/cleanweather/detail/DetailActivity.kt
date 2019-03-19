@@ -2,7 +2,8 @@ package it.codingjam.cleanweather.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import it.codingjam.cleanweather.domain.DomainComponentProvider
+import it.codingjam.cleanweather.utils.ComponentHolder
+import it.codingjam.cleanweather.utils.get
 import it.codingjam.cleanweather.utils.observe
 import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -19,9 +20,10 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val domainComponent = (application as DomainComponentProvider).domainComponent
-
-        DaggerDetailComponent.builder().domainComponent(domainComponent).build().inject(this)
+        DaggerDetailComponent.builder()
+                .domainComponent((application as ComponentHolder).get())
+                .build()
+                .inject(this)
 
         setContentView(R.layout.activity_detail)
 

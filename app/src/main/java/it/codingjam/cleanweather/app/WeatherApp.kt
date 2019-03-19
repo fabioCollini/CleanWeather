@@ -3,9 +3,8 @@ package it.codingjam.cleanweather.app
 import android.app.Application
 import it.codingjam.cleanweather.api.DaggerApiComponent
 import it.codingjam.cleanweather.domain.DaggerDomainComponent
-import it.codingjam.cleanweather.domain.DomainComponentProvider
+import it.codingjam.cleanweather.domain.DomainComponent
 import it.codingjam.cleanweather.main.MainDependencies
-import it.codingjam.cleanweather.main.MainDependenciesProvider
 import it.codingjam.cleanweather.position.DaggerLocationComponent
 import it.codingjam.cleanweather.utils.ComponentHolder
 import it.codingjam.cleanweather.utils.ComponentsMap
@@ -13,23 +12,30 @@ import it.codingjam.cleanweather.weather.DaggerWeatherComponent
 
 class WeatherApp(
         private val componentsMap: ComponentsMap = ComponentsMap()
-) : Application(), DomainComponentProvider, MainDependenciesProvider, ComponentHolder by componentsMap {
+) : Application(), ComponentHolder by componentsMap {
 
-    val locationComponent = DaggerLocationComponent.builder().app(this).build()
+    init {
+        componentsMap.createComponent<MainDependencies> {
+            DaggerMainDependenciesImpl.create()
+        }
 
-    val apiComponent = DaggerApiComponent.builder().build()
+        componentsMap.createComponent<DomainComponent> {
+            val locationComponent = DaggerLocationComponent.builder().app(this).build()
 
-    val weatherComponent = DaggerWeatherComponent
-            .builder()
-            .weatherDependencies(apiComponent)
-            .build()
+            val apiComponent = DaggerApiComponent.create()
 
-    override val domainComponent =
-            DaggerDomainComponent.builder().domainDependencies(DomainDependenciesImpl(
+            val weatherComponent = DaggerWeatherComponent
+                    .builder()
+                    .weatherDependencies(apiComponent)
+                    .build()
+
+            val domainDependencies = DomainDependenciesImpl(
                     locationComponent,
                     weatherComponent
-            )).build()
-
-    override val mainDependencies: MainDependencies
-        get() = DaggerMainDependenciesImpl.create()
+            )
+            DaggerDomainComponent.builder()
+                    .domainDependencies(domainDependencies)
+                    .build()
+        }
+    }
 }

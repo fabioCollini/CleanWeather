@@ -11,11 +11,20 @@ interface ComponentHolder {
 inline fun <reified C : Any> ComponentHolder.getOrCreate(noinline componentFactory: () -> C): C =
         getOrCreate(C::class.java, componentFactory)
 
-class ComponentsMap : ComponentHolder {
-    private val moduleComponents = HashMap<Class<*>, Any>()
+inline fun <reified C : Any> ComponentHolder.get(): C =
+        getOrCreate(C::class.java) {
+            throw Exception("Component ${C::class.java.simpleName} not available in ${this::class.java.simpleName}")
+        }
 
-    override fun <C : Any> getOrCreate(componentClass: Class<C>, componentFactory: Function0<C>): C =
+class ComponentsMap : ComponentHolder {
+    val moduleComponents = HashMap<Class<*>, Any>()
+
+    override fun <C : Any> getOrCreate(componentClass: Class<C>, componentFactory: () -> C): C =
             moduleComponents.getOrPut(componentClass, componentFactory) as C
+
+    inline fun <reified C : Any> createComponent(noinline componentFactory: () -> C) {
+        getOrCreate(C::class.java, componentFactory)
+    }
 }
 
 inline fun <reified C : Any> Fragment.getOrCreateAppComponent(noinline componentFactory: () -> C) =

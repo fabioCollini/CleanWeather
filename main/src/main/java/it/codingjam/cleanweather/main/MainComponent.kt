@@ -41,7 +41,3 @@ interface MainNavigator {
 interface MainDependencies {
     val mainNavigator: MainNavigator
 }
-
-interface MainDependenciesProvider {
-    val mainDependencies: MainDependencies
-}

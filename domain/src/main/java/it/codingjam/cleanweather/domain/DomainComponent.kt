@@ -2,10 +2,6 @@ package it.codingjam.cleanweather.domain
 
 import dagger.Component
 
-interface DomainComponentProvider {
-    val domainComponent: DomainComponent
-}
-
 @DomainSingleton
 @Component(dependencies = [DomainDependencies::class])
 interface DomainComponent {
