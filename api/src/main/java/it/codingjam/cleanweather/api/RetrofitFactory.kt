@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitFactory {
     inline fun <reified T> createService(
-            baseUrl: String = "http://api.openweathermap.org/data/2.5/",
+            baseUrl: String = "https://api.openweathermap.org/data/2.5/",
             debug: Boolean = false): T {
         val httpClient = OkHttpClient.Builder()
 

@@ -7,8 +7,8 @@ class WeatherUseCase(
         private val locationManager: LocationManager,
         private val repository: TemperatureRepository) {
 
-    suspend fun getCityData(): String = coroutineScope {
-        try {
+    suspend fun getCityData(): String = try {
+        coroutineScope {
             val location = locationManager.getLastLocation()
 
             val cities = async { locationManager.getCities(location) }
@@ -17,8 +17,8 @@ class WeatherUseCase(
 
             val city = cities.await().getOrElse(0) { "No city found" }
             "$city \n $temperature"
-        } catch (e: Exception) {
-            "Error retrieving data: ${e.message}"
         }
+    } catch (e: Exception) {
+        "Error retrieving data: ${e.message}"
     }
 }
