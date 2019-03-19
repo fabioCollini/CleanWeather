@@ -21,7 +21,7 @@ class WeatherApiTest {
         mockWebServer.enqueueResponse("weather.json")
 
         val response = runBlocking {
-            api.currentWeather(LAT, LON).await()
+            api.currentWeather(LAT, LON)
         }
 
         assert(response.main.temp).isEqualTo(303.15f)
@@ -34,7 +34,7 @@ class WeatherApiTest {
         mockWebServer.enqueueResponse("forecast.json")
 
         val response = runBlocking {
-            api.forecast(LAT, LON).await()
+            api.forecast(LAT, LON)
         }
 
         assert(response.list).hasSize(40)
