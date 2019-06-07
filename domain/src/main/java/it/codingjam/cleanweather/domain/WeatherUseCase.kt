@@ -6,7 +6,6 @@ import javax.inject.Inject
 import javax.inject.Scope
 
 @Scope
-@Retention
 annotation class DomainSingleton
 
 @OpenForTesting

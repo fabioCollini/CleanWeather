@@ -8,7 +8,6 @@ import it.codingjam.cleanweather.weather.WeatherDependencies
 import javax.inject.Scope
 
 @Scope
-@Retention
 annotation class ApiSingleton
 
 @Component(modules = [ApiModule::class])

@@ -9,16 +9,17 @@ import it.codingjam.cleanweather.domain.LocationManager
 import javax.inject.Scope
 
 @Scope
-@Retention
 annotation class LocationSingleton
+
+interface LocationComponent {
+    val locationManager: LocationManager
+}
 
 @Component(
         modules = [LocationModule::class]
 )
 @LocationSingleton
-interface LocationComponent {
-    val locationManager: LocationManager
-
+interface LocationComponentImpl : LocationComponent {
     @Component.Builder
     interface Builder {
         fun build(): LocationComponent

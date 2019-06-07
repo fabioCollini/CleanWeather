@@ -11,14 +11,16 @@ import javax.inject.Scope
 @Retention
 annotation class WeatherSingleton
 
+interface WeatherComponent {
+    val temperatureRepository: TemperatureRepository
+}
+
 @Component(
         modules = [WeatherModule::class],
         dependencies = [WeatherDependencies::class]
 )
 @WeatherSingleton
-interface WeatherComponent {
-    val temperatureRepository: TemperatureRepository
-}
+interface WeatherComponentImpl : WeatherComponent
 
 interface WeatherDependencies {
     val weatherApi: WeatherApi

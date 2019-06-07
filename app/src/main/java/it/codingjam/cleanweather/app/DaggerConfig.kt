@@ -11,7 +11,6 @@ import it.codingjam.cleanweather.weather.WeatherComponent
 import javax.inject.Scope
 
 @Scope
-@Retention
 annotation class AppSingleton
 
 @Module
@@ -26,7 +25,9 @@ interface MainDependenciesModule {
 @AppSingleton
 interface MainDependenciesImpl : MainDependencies
 
-class DomainDependenciesImpl(
-        private val locationComponent: LocationComponent,
-        private val weatherComponent: WeatherComponent
-) : DomainDependencies, LocationComponent by locationComponent, WeatherComponent by weatherComponent
+@Scope
+annotation class DomainDependenciesSingleton
+
+@DomainDependenciesSingleton
+@Component(dependencies = [LocationComponent::class, WeatherComponent::class])
+interface DomainDependenciesImpl : DomainDependencies
