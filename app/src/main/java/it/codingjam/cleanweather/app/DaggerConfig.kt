@@ -25,9 +25,5 @@ interface MainDependenciesModule {
 @AppSingleton
 interface MainDependenciesImpl : MainDependencies
 
-@Scope
-annotation class DomainDependenciesSingleton
-
-@DomainDependenciesSingleton
 @Component(dependencies = [LocationComponent::class, WeatherComponent::class])
 interface DomainDependenciesImpl : DomainDependencies

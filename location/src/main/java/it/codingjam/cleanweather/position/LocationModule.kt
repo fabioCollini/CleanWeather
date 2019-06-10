@@ -9,7 +9,7 @@ import it.codingjam.cleanweather.domain.LocationManager
 import javax.inject.Scope
 
 @Scope
-annotation class LocationSingleton
+internal annotation class LocationSingleton
 
 interface LocationComponent {
     val locationManager: LocationManager
@@ -30,7 +30,7 @@ interface LocationComponentImpl : LocationComponent {
 }
 
 @Module
-class LocationModule {
+internal class LocationModule {
 
     @LocationSingleton
     @Provides
