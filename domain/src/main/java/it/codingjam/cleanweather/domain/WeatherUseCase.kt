@@ -3,10 +3,6 @@ package it.codingjam.cleanweather.domain
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
-import javax.inject.Scope
-
-@Scope
-annotation class DomainSingleton
 
 @OpenForTesting
 @DomainSingleton
