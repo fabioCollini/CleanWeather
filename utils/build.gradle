@@ -22,6 +22,7 @@ android {
 }
 
 dependencies {
+    api project(':kotlinUtils')
     implementation "com.google.dagger:dagger:2.22.1"
 
     implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'

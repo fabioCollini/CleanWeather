@@ -2,7 +2,11 @@ package it.codingjam.cleanweather.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import it.codingjam.cleanweather.utils.*
+import it.codingjam.cleanweather.domain.domainComponent
+import it.codingjam.cleanweather.kotlinutils.ComponentHolder
+import it.codingjam.cleanweather.kotlinutils.get
+import it.codingjam.cleanweather.utils.getOrCreateAppComponent
+import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         getOrCreateAppComponent {
             DaggerMainComponent.builder()
-                    .domainComponent((application as ComponentHolder).get())
+                    .domainComponent((application as ComponentHolder).domainComponent)
                     .mainDependencies((application as ComponentHolder).get())
                     .build()
         }.inject(this)
