@@ -5,8 +5,8 @@ apply plugin: 'java-library'
 dependencies {
     api project(':domain')
 
-    implementation "com.google.dagger:dagger:2.19"
-    kapt "com.google.dagger:dagger-compiler:2.19"
+    implementation "com.google.dagger:dagger:2.22.1"
+    kapt "com.google.dagger:dagger-compiler:2.22.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
