@@ -25,3 +25,12 @@ class ComponentsMap : ComponentHolder {
         getOrCreate(C::class.java, componentFactory)
     }
 }
+
+inline fun <reified T> loadSingleService(): T {
+    val provider = ServiceLoader.load(T::class.java, T::class.java.classLoader)
+    return provider.iterator().next()
+}
+
+interface DependenciesCreator<T> {
+    fun dependencies(componentHolder: ComponentHolder): T
+}

@@ -25,6 +25,7 @@ android {
 
 dependencies {
     api project(':domain')
+    api project(':utils')
 
     implementation "com.google.dagger:dagger:2.22.1"
     kapt "com.google.dagger:dagger-compiler:2.22.1"

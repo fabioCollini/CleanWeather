@@ -1,37 +1,21 @@
 package it.codingjam.cleanweather.app
 
 import android.app.Application
-import it.codingjam.cleanweather.api.DaggerApiComponent
+import com.google.auto.service.AutoService
 import it.codingjam.cleanweather.domain.DomainDependencies
+import it.codingjam.cleanweather.domain.DomainDependenciesProvider
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.ComponentsMap
-import it.codingjam.cleanweather.main.MainDependencies
-import it.codingjam.cleanweather.position.DaggerLocationComponentImpl
-import it.codingjam.cleanweather.weather.DaggerWeatherComponentImpl
+import it.codingjam.cleanweather.position.locationComponent
+import it.codingjam.cleanweather.weather.weatherComponent
 
-class WeatherApp(
-        private val componentsMap: ComponentsMap = ComponentsMap()
-) : Application(), ComponentHolder by componentsMap {
+class WeatherApp : Application(), ComponentHolder by ComponentsMap()
 
-    init {
-        componentsMap.createComponent<MainDependencies> {
-            DaggerMainDependenciesImpl.create()
-        }
-
-        componentsMap.createComponent<DomainDependencies> {
-            val locationComponent = DaggerLocationComponentImpl.builder().app(this).build()
-
-            val apiComponent = DaggerApiComponent.create()
-
-            val weatherComponent = DaggerWeatherComponentImpl
-                    .builder()
-                    .weatherDependencies(apiComponent)
-                    .build()
-
+@AutoService(DomainDependenciesProvider::class)
+class DomainDependenciesProviderImpl : DomainDependenciesProvider {
+    override fun domainDependencies(componentHolder: ComponentHolder): DomainDependencies =
             DaggerDomainDependenciesImpl.builder()
-                    .locationComponent(locationComponent)
-                    .weatherComponent(weatherComponent)
+                    .locationComponent((componentHolder as Application).locationComponent)
+                    .weatherComponent(componentHolder.weatherComponent)
                     .build()
-        }
-    }
 }

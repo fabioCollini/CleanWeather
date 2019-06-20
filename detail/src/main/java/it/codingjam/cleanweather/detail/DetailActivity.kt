@@ -6,6 +6,7 @@ import it.codingjam.cleanweather.domain.domainComponent
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_detail.*
+import it.codingjam.cleanweather.utils.observe
 import javax.inject.Inject
 import javax.inject.Provider
 

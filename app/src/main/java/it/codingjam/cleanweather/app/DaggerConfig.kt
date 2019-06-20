@@ -1,9 +1,11 @@
 package it.codingjam.cleanweather.app
 
+import com.google.auto.service.AutoService
 import dagger.Binds
 import dagger.Component
 import dagger.Module
 import it.codingjam.cleanweather.domain.DomainDependencies
+import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.main.MainDependencies
 import it.codingjam.cleanweather.main.MainNavigator
 import it.codingjam.cleanweather.position.LocationComponent
@@ -27,3 +29,8 @@ interface MainDependenciesImpl : MainDependencies
 
 @Component(dependencies = [LocationComponent::class, WeatherComponent::class])
 interface DomainDependenciesImpl : DomainDependencies
+
+@AutoService(MainDependencies.Creator::class)
+class MainDependenciesCreator : MainDependencies.Creator {
+    override fun dependencies(componentHolder: ComponentHolder) = DaggerMainDependenciesImpl.create()
+}

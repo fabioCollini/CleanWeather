@@ -2,12 +2,10 @@ package it.codingjam.cleanweather.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import it.codingjam.cleanweather.domain.domainComponent
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
-import it.codingjam.cleanweather.kotlinutils.get
-import it.codingjam.cleanweather.utils.getOrCreateAppComponent
 import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import it.codingjam.cleanweather.utils.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -27,12 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getOrCreateAppComponent {
-            DaggerMainComponent.builder()
-                    .domainComponent((application as ComponentHolder).domainComponent)
-                    .mainDependencies((application as ComponentHolder).get())
-                    .build()
-        }.inject(this)
+        (application as ComponentHolder).mainComponent.inject(this)
 
         setContentView(R.layout.activity_main)
 
