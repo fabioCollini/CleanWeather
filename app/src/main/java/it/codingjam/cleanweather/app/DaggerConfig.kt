@@ -19,11 +19,22 @@ interface MainDependenciesModule {
     fun provideNavigator(impl: MainNavigatorImpl): MainNavigator
 }
 
-@Component(modules = [
-    MainDependenciesModule::class
-])
+@Component(
+    modules = [
+        MainDependenciesModule::class
+    ]
+)
 @AppSingleton
 interface MainDependenciesImpl : MainDependencies
 
 @Component(dependencies = [LocationComponent::class, WeatherComponent::class])
-interface DomainDependenciesImpl : DomainDependencies
+interface DomainDependenciesImpl : DomainDependencies {
+
+    @Component.Factory
+    interface Factory {
+        fun create(
+            locationComponent: LocationComponent,
+            weatherComponent: WeatherComponent
+        ): DomainDependenciesImpl
+    }
+}

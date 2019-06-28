@@ -20,23 +20,19 @@ class WeatherApp(
         }
 
         componentsMap.createComponent<DomainComponent> {
-            val locationComponent = DaggerLocationComponentImpl.builder().app(this).build()
+            val locationComponent = DaggerLocationComponentImpl.factory().create(this)
 
             val apiComponent = DaggerApiComponent.create()
 
             val weatherComponent = DaggerWeatherComponentImpl
-                    .builder()
-                    .weatherDependencies(apiComponent)
-                    .build()
+                    .factory()
+                    .create(apiComponent)
 
-            val domainDependencies = DaggerDomainDependenciesImpl.builder()
-                    .locationComponent(locationComponent)
-                    .weatherComponent(weatherComponent)
-                    .build()
+            val domainDependencies = DaggerDomainDependenciesImpl.factory()
+                .create(locationComponent, weatherComponent)
 
-            DaggerDomainComponent.builder()
-                    .domainDependencies(domainDependencies)
-                    .build()
+            DaggerDomainComponent.factory()
+                    .create(domainDependencies)
         }
     }
 }

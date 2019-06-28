@@ -6,7 +6,6 @@ import dagger.Provides
 import it.codingjam.cleanweather.domain.TemperatureRepository
 import javax.inject.Scope
 
-
 @Scope
 internal annotation class WeatherSingleton
 
@@ -19,7 +18,13 @@ interface WeatherComponent {
         dependencies = [WeatherDependencies::class]
 )
 @WeatherSingleton
-internal interface WeatherComponentImpl : WeatherComponent
+interface WeatherComponentImpl : WeatherComponent {
+
+    @Component.Factory
+    interface Factory {
+        fun create(weatherDependencies: WeatherDependencies): WeatherComponent
+    }
+}
 
 interface WeatherDependencies {
     val weatherApi: WeatherApi
