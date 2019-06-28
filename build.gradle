@@ -6,11 +6,13 @@ buildscript {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         google()
         jcenter()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath 'com.soundcloud.delect:delect-plugin:0.1.0-SNAPSHOT'
     }
 }
 
@@ -22,6 +24,12 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
+}
+
+apply plugin: 'com.soundcloud.delect'
+
+delect {
+    useReflectForASBuilds = true
 }
 
 task clean(type: Delete) {

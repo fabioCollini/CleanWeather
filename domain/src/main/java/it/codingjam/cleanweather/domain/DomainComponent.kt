@@ -13,6 +13,11 @@ internal annotation class DomainSingleton
 @Component(dependencies = [DomainDependencies::class])
 interface DomainComponent {
     val weatherUseCase: WeatherUseCase
+
+    @Component.Factory
+    interface Factory {
+        fun create(domainDependencies: DomainDependencies): DomainComponent
+    }
 }
 
 interface DomainDependencies {
