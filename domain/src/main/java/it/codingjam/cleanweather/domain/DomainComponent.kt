@@ -34,5 +34,5 @@ val ComponentHolder.domainComponent: DomainComponent
     get() = getOrCreate {
         val provider = loadSingleService<DomainDependenciesProvider>()
         val domainDependencies = provider.domainDependencies(this)
-        DaggerDomainComponent.builder().domainDependencies(domainDependencies).build()
+        DaggerDomainComponent.factory().create(domainDependencies)
     }

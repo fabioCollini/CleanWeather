@@ -48,9 +48,8 @@ internal class WeatherModule {
 val ComponentHolder.weatherComponent: WeatherComponent
     get() = getOrCreate {
         DaggerWeatherComponentImpl
-                .builder()
-                .weatherDependencies(loadSingleService<WeatherDependencies.Creator>().dependencies(this))
-                .build()
+                .factory()
+                .create(loadSingleService<WeatherDependencies.Creator>().dependencies(this))
     }
 
 inline fun <D, reified T : DependenciesCreator<D>> ComponentHolder.dependencies(): D {

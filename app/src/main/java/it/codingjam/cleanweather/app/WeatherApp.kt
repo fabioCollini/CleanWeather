@@ -14,8 +14,8 @@ class WeatherApp : Application(), ComponentHolder by ComponentsMap()
 @AutoService(DomainDependenciesProvider::class)
 class DomainDependenciesProviderImpl : DomainDependenciesProvider {
     override fun domainDependencies(componentHolder: ComponentHolder): DomainDependencies =
-            DaggerDomainDependenciesImpl.builder()
-                    .locationComponent((componentHolder as Application).locationComponent)
-                    .weatherComponent(componentHolder.weatherComponent)
-                    .build()
+            DaggerDomainDependenciesImpl.factory().create(
+                    (componentHolder as Application).locationComponent,
+                    componentHolder.weatherComponent
+            )
 }

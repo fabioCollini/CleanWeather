@@ -38,5 +38,5 @@ internal class LocationModule {
 
 val Application.locationComponent: LocationComponent
     get() = getOrCreateAppComponent {
-        DaggerLocationComponentImpl.builder().app(this).build()
+        DaggerLocationComponentImpl.factory().create(this)
     }
