@@ -4,8 +4,13 @@ import dagger.Component
 import it.codingjam.cleanweather.domain.DomainComponent
 import it.codingjam.cleanweather.domain.FeatureSingleton
 
-@Component(dependencies = [DomainComponent::class])
+@Component(dependencies = [DetailComponent::class])
 @FeatureSingleton
 interface DetailComponent {
     fun inject(activity: DetailActivity)
+
+    @Component.Factory
+    interface Factory {
+        fun create(domainComponent: DomainComponent): DetailComponent
+    }
 }

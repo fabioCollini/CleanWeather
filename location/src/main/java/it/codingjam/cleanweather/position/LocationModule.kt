@@ -20,12 +20,10 @@ interface LocationComponent {
 )
 @LocationSingleton
 interface LocationComponentImpl : LocationComponent {
-    @Component.Builder
-    interface Builder {
-        fun build(): LocationComponent
 
-        @BindsInstance
-        fun app(app: Application): Builder
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance app: Application): LocationComponentImpl
     }
 }
 

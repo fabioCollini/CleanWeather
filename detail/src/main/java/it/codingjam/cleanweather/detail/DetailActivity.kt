@@ -20,9 +20,8 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DaggerDetailComponent.builder()
-                .domainComponent((application as ComponentHolder).get())
-                .build()
+        DaggerDetailComponent.factory()
+                .create((application as ComponentHolder).get())
                 .inject(this)
 
         setContentView(R.layout.activity_detail)
