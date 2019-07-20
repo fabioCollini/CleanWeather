@@ -37,13 +37,16 @@ dependencies {
     api project(':domain')
     api project(':utils')
 
-    implementation "com.google.dagger:dagger:2.22.1"
-    kapt "com.google.dagger:dagger-compiler:2.22.1"
+    implementation "com.google.dagger:dagger:2.23.2"
+    kapt "com.google.dagger:dagger-compiler:2.23.2"
 
     implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
+    implementation 'com.github.fabioCollini.inversion:inversionLib:0.1'
+    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.1'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.2"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api 'androidx.appcompat:appcompat:1.0.2'

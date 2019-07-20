@@ -5,9 +5,12 @@ import android.widget.Toast
 import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
 import com.codingjam.cleanweather.entities.Temperature
+import com.nytimes.inversion.InversionProvider
 import it.codingjam.cleanweather.domain.DomainDependencies
 import it.codingjam.cleanweather.domain.LocationManager
 import it.codingjam.cleanweather.domain.TemperatureRepository
+import it.codingjam.cleanweather.kotlinutils.ComponentHolder
+import it.codingjam.cleanweather.kotlinutils.getOrCreate
 import it.codingjam.cleanweather.main.MainDependencies
 import it.codingjam.cleanweather.main.MainNavigator
 
@@ -29,6 +32,9 @@ class FakeDomainDependencies : DomainDependencies {
         }
 }
 
+@InversionProvider
+fun provideImpl(componentHolder: ComponentHolder): DomainDependencies = componentHolder.getOrCreate { FakeDomainDependencies() }
+
 class FakeMainDependencies : MainDependencies {
     override val mainNavigator: MainNavigator
         get() = object : MainNavigator {
@@ -37,3 +43,6 @@ class FakeMainDependencies : MainDependencies {
             }
         }
 }
+
+@InversionProvider
+fun provideMainDependenciesImpl(componentHolder: ComponentHolder): MainDependencies = componentHolder.getOrCreate { FakeMainDependencies() }

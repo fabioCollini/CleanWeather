@@ -1,6 +1,6 @@
 package it.codingjam.cleanweather.api
 
-import com.google.auto.service.AutoService
+import com.nytimes.inversion.InversionProvider
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -34,7 +34,5 @@ internal class ApiModule {
 
 val ComponentHolder.apiComponent: ApiComponent get() = getOrCreate { DaggerApiComponent.create() }
 
-@AutoService(WeatherDependencies.Creator::class)
-class WeatherDependenciesProviderImpl : WeatherDependencies.Creator {
-    override fun dependencies(componentHolder: ComponentHolder) = componentHolder.apiComponent
-}
+@InversionProvider
+fun provideImpl(componentHolder: ComponentHolder): WeatherDependencies = componentHolder.apiComponent

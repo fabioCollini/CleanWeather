@@ -37,10 +37,13 @@ android {
 dependencies {
     implementation project(':main')
 
-    implementation "com.google.dagger:dagger:2.22.1"
-    kapt "com.google.dagger:dagger-compiler:2.22.1"
+    implementation "com.google.dagger:dagger:2.23.2"
+    kapt "com.google.dagger:dagger-compiler:2.23.2"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.github.fabioCollini.inversion:inversionLib:0.1'
+    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

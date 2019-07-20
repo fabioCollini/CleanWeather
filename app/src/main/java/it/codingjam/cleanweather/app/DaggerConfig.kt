@@ -1,15 +1,19 @@
 package it.codingjam.cleanweather.app
 
-import com.google.auto.service.AutoService
+import android.app.Application
+import com.nytimes.inversion.InversionProvider
 import dagger.Binds
 import dagger.Component
 import dagger.Module
 import it.codingjam.cleanweather.domain.DomainDependencies
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
+import it.codingjam.cleanweather.kotlinutils.getOrCreate
 import it.codingjam.cleanweather.main.MainDependencies
 import it.codingjam.cleanweather.main.MainNavigator
 import it.codingjam.cleanweather.position.LocationComponent
+import it.codingjam.cleanweather.position.locationComponent
 import it.codingjam.cleanweather.weather.WeatherComponent
+import it.codingjam.cleanweather.weather.weatherComponent
 import javax.inject.Scope
 
 @Scope
@@ -29,6 +33,11 @@ interface MainDependenciesModule {
 @AppSingleton
 interface MainDependenciesImpl : MainDependencies
 
+@InversionProvider
+fun ComponentHolder.provideMainDependenciesImpl(): MainDependencies = getOrCreate {
+    DaggerMainDependenciesImpl.create()
+}
+
 @Component(dependencies = [LocationComponent::class, WeatherComponent::class])
 interface DomainDependenciesImpl : DomainDependencies {
 
@@ -41,7 +50,10 @@ interface DomainDependenciesImpl : DomainDependencies {
     }
 }
 
-@AutoService(MainDependencies.Creator::class)
-class MainDependenciesCreator : MainDependencies.Creator {
-    override fun dependencies(componentHolder: ComponentHolder) = DaggerMainDependenciesImpl.create()
+@InversionProvider
+fun ComponentHolder.provideImpl(): DomainDependencies = getOrCreate {
+    DaggerDomainDependenciesImpl.factory().create(
+            (this as Application).locationComponent,
+            weatherComponent
+    )
 }

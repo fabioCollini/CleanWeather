@@ -1,21 +1,9 @@
 package it.codingjam.cleanweather.app
 
 import android.app.Application
-import com.google.auto.service.AutoService
-import it.codingjam.cleanweather.domain.DomainDependencies
-import it.codingjam.cleanweather.domain.DomainDependenciesProvider
+import com.nytimes.inversion.InversionValidate
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.ComponentsMap
-import it.codingjam.cleanweather.position.locationComponent
-import it.codingjam.cleanweather.weather.weatherComponent
 
+@InversionValidate
 class WeatherApp : Application(), ComponentHolder by ComponentsMap()
-
-@AutoService(DomainDependenciesProvider::class)
-class DomainDependenciesProviderImpl : DomainDependenciesProvider {
-    override fun domainDependencies(componentHolder: ComponentHolder): DomainDependencies =
-            DaggerDomainDependenciesImpl.factory().create(
-                    (componentHolder as Application).locationComponent,
-                    componentHolder.weatherComponent
-            )
-}

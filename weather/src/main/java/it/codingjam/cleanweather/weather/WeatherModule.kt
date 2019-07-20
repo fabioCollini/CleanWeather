@@ -1,14 +1,14 @@
 package it.codingjam.cleanweather.weather
 
+import com.nytimes.inversion.Inversion
+import com.nytimes.inversion.InversionDef
+import com.nytimes.inversion.of
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import it.codingjam.cleanweather.domain.TemperatureRepository
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
-import it.codingjam.cleanweather.kotlinutils.DependenciesCreator
 import it.codingjam.cleanweather.kotlinutils.getOrCreate
-import it.codingjam.cleanweather.kotlinutils.loadSingleService
-import java.util.*
 import javax.inject.Scope
 
 @Scope
@@ -33,9 +33,10 @@ interface WeatherComponentImpl : WeatherComponent {
 
 interface WeatherDependencies {
     val weatherApi: WeatherApi
-
-    interface Creator : DependenciesCreator<WeatherDependencies>
 }
+
+@get:InversionDef
+val ComponentHolder.weatherDependencies by Inversion.of(WeatherDependencies::class)
 
 @Module
 internal class WeatherModule {
@@ -49,10 +50,5 @@ val ComponentHolder.weatherComponent: WeatherComponent
     get() = getOrCreate {
         DaggerWeatherComponentImpl
                 .factory()
-                .create(loadSingleService<WeatherDependencies.Creator>().dependencies(this))
+                .create(weatherDependencies())
     }
-
-inline fun <D, reified T : DependenciesCreator<D>> ComponentHolder.dependencies(): D {
-    val creator = loadSingleService<T>()
-    return creator.dependencies(this)
-}
