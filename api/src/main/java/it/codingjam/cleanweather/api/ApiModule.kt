@@ -1,6 +1,6 @@
 package it.codingjam.cleanweather.api
 
-import com.nytimes.inversion.InversionProvider
+import inversion.InversionProvider
 import dagger.Component
 import dagger.Module
 import dagger.Provides

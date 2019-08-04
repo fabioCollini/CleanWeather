@@ -5,7 +5,7 @@ import android.widget.Toast
 import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
 import com.codingjam.cleanweather.entities.Temperature
-import com.nytimes.inversion.InversionProvider
+import inversion.InversionProvider
 import it.codingjam.cleanweather.domain.DomainDependencies
 import it.codingjam.cleanweather.domain.LocationManager
 import it.codingjam.cleanweather.domain.TemperatureRepository

@@ -1,7 +1,7 @@
 package it.codingjam.cleanweather.app
 
 import android.app.Application
-import com.nytimes.inversion.InversionProvider
+import inversion.InversionProvider
 import dagger.Binds
 import dagger.Component
 import dagger.Module

@@ -38,8 +38,8 @@ dependencies {
     implementation project(':domain')
     implementation project(':location')
 
-    implementation 'com.github.fabioCollini.inversion:inversionLib:0.1'
-    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.1'
+    implementation 'com.github.fabioCollini.inversion:inversionLib:0.2'
+    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.2'
 
     implementation "com.google.dagger:dagger:2.23.2"
     kapt "com.google.dagger:dagger-compiler:2.23.2"

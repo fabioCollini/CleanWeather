@@ -1,8 +1,8 @@
 package it.codingjam.cleanweather.weather
 
-import com.nytimes.inversion.Inversion
-import com.nytimes.inversion.InversionDef
-import com.nytimes.inversion.of
+import inversion.Inversion
+import inversion.InversionDef
+import inversion.of
 import dagger.Component
 import dagger.Module
 import dagger.Provides

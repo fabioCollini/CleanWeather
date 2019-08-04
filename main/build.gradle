@@ -43,8 +43,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
-    implementation 'com.github.fabioCollini.inversion:inversionLib:0.1'
-    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.1'
+    implementation 'com.github.fabioCollini.inversion:inversionLib:0.2'
+    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.2'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.2"
 

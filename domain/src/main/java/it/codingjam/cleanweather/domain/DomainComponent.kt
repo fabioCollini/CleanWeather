@@ -1,10 +1,9 @@
 package it.codingjam.cleanweather.domain
 
-import com.nytimes.inversion.Inversion
-import com.nytimes.inversion.InversionDef
-import com.nytimes.inversion.of
+import inversion.Inversion
+import inversion.InversionDef
+import inversion.of
 import dagger.Component
-import dagger.Module
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.getOrCreate
 import javax.inject.Scope
