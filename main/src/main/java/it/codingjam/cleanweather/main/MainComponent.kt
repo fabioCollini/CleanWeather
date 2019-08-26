@@ -36,7 +36,6 @@ interface MainDependencies {
 @get:InversionDef
 val ComponentHolder.mainDependencies by Inversion.of(MainDependencies::class)
 
-val ComponentHolder.mainComponent: MainComponent
-    get() = getOrCreate {
-        MainComponentImpl(domainComponent, mainDependencies())
-    }
+fun ComponentHolder.mainComponent(): MainComponent = getOrCreate {
+    MainComponentImpl(domainComponent, mainDependencies())
+}

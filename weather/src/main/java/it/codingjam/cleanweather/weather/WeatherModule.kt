@@ -24,7 +24,6 @@ interface WeatherDependencies {
 @get:InversionDef
 val ComponentHolder.weatherDependencies by Inversion.of(WeatherDependencies::class)
 
-val ComponentHolder.weatherComponent: WeatherComponent
-    get() = getOrCreate {
-        WeatherComponentImpl(weatherDependencies())
-    }
+fun ComponentHolder.weatherComponent(): WeatherComponent = getOrCreate {
+    WeatherComponentImpl(weatherDependencies())
+}

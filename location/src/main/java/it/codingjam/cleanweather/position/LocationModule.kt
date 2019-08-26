@@ -14,7 +14,6 @@ private class LocationComponentImpl(application: Application) : LocationComponen
     }
 }
 
-val Application.locationComponent: LocationComponent
-    get() = getOrCreateAppComponent {
-        LocationComponentImpl(this)
-    }
+fun ComponentHolderApp.locationComponent(): LocationComponent = getOrCreate {
+    LocationComponentImpl(this)
+}

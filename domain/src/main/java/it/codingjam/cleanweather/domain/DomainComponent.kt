@@ -10,7 +10,7 @@ interface DomainComponent {
     val weatherUseCase: WeatherUseCase
 }
 
-class DomainComponentImpl(dependencies: DomainDependencies) : DomainComponent, DomainDependencies by dependencies {
+private class DomainComponentImpl(dependencies: DomainDependencies) : DomainComponent, DomainDependencies by dependencies {
     override val weatherUseCase by lazy {
         WeatherUseCase(locationManager, temperatureRepository)
     }
@@ -25,7 +25,6 @@ interface DomainDependencies {
 @get:InversionDef
 val ComponentHolder.domainDependencies by Inversion.of(DomainDependencies::class)
 
-val ComponentHolder.domainComponent: DomainComponent
-    get() = getOrCreate {
-        DomainComponentImpl(domainDependencies())
-    }
+fun ComponentHolder.domainComponent(): DomainComponent = getOrCreate {
+    DomainComponentImpl(domainDependencies())
+}

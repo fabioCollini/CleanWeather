@@ -10,6 +10,10 @@ import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
+    DaggerDetailComponent.factory()
+    .create((application as ComponentHolder).domainComponent())
+    .inject(this)
+
     private val component by lazy {
         DetailComponentImpl((application as ComponentHolder).domainComponent)
     }

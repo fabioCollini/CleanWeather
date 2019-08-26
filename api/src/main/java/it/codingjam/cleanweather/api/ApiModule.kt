@@ -20,7 +20,7 @@ internal class ApiComponentImpl : ApiComponent {
     }
 }
 
-val ComponentHolder.apiComponent: ApiComponent get() = getOrCreate { ApiComponentImpl() }
+fun ComponentHolder.apiComponent(): ApiComponent = getOrCreate { ApiComponentImpl() }
 
 @InversionProvider
-fun provideImpl(componentHolder: ComponentHolder): WeatherDependencies = componentHolder.apiComponent
+fun provideImpl(componentHolder: ComponentHolder): WeatherDependencies = componentHolder.apiComponent()

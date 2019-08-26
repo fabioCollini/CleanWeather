@@ -8,6 +8,7 @@ import it.codingjam.cleanweather.kotlinutils.getOrCreate
 import it.codingjam.cleanweather.main.MainDependencies
 import it.codingjam.cleanweather.position.LocationComponent
 import it.codingjam.cleanweather.position.locationComponent
+import it.codingjam.cleanweather.utils.ComponentHolderApp
 import it.codingjam.cleanweather.weather.WeatherComponent
 import it.codingjam.cleanweather.weather.weatherComponent
 
@@ -28,7 +29,7 @@ private class DomainDependenciesImpl(
 @InversionProvider
 fun ComponentHolder.provideImpl(): DomainDependencies = getOrCreate {
     DomainDependenciesImpl(
-            (this as Application).locationComponent,
-            weatherComponent
+            (this as ComponentHolderApp).locationComponent(),
+            weatherComponent()
     )
 }
