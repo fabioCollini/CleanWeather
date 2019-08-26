@@ -1,9 +1,7 @@
 package it.codingjam.cleanweather.app
 
-import android.app.Application
 import inversion.InversionValidate
-import it.codingjam.cleanweather.kotlinutils.ComponentHolder
-import it.codingjam.cleanweather.kotlinutils.ComponentsMap
+import it.codingjam.cleanweather.utils.ComponentHolderApp
 
 @InversionValidate
-class WeatherApp : Application(), ComponentHolder by ComponentsMap()
+class WeatherApp : ComponentHolderApp()

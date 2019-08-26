@@ -6,7 +6,8 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import it.codingjam.cleanweather.domain.LocationManager
-import it.codingjam.cleanweather.utils.getOrCreateAppComponent
+import it.codingjam.cleanweather.kotlinutils.getOrCreate
+import it.codingjam.cleanweather.utils.ComponentHolderApp
 import javax.inject.Scope
 
 @Scope
@@ -36,6 +37,6 @@ internal class LocationModule {
     fun provideLocationManager(impl: AndroidLocationManager): LocationManager = impl
 }
 
-fun Application.locationComponent(): LocationComponent = getOrCreateAppComponent {
+fun ComponentHolderApp.locationComponent(): LocationComponent = getOrCreate {
     DaggerLocationComponentImpl.factory().create(this)
 }
