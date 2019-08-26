@@ -14,14 +14,14 @@ inline fun <reified C : Any> ComponentHolder.get(): C =
             throw Exception("Component ${C::class.java.simpleName} not available in ${this::class.java.simpleName}")
         }
 
+inline fun <reified C : Any> ComponentHolder.createComponent(noinline componentFactory: () -> C) {
+    getOrCreate(C::class.java, componentFactory)
+}
+
 class ComponentsMap : ComponentHolder {
     val moduleComponents = HashMap<Class<*>, Any>()
 
     @Suppress("UNCHECKED_CAST")
     override fun <C : Any> getOrCreate(componentClass: Class<C>, componentFactory: () -> C): C =
             moduleComponents.getOrPut(componentClass, componentFactory) as C
-
-    inline fun <reified C : Any> createComponent(noinline componentFactory: () -> C) {
-        getOrCreate(C::class.java, componentFactory)
-    }
 }

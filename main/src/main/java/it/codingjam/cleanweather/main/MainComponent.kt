@@ -1,9 +1,8 @@
 package it.codingjam.cleanweather.main
 
 import android.app.Activity
+import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
-import dagger.Provides
 import inversion.Inversion
 import inversion.InversionDef
 import inversion.of
@@ -14,7 +13,6 @@ import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.getOrCreate
 
 @Component(
-        modules = [MainModule::class],
         dependencies = [
             DomainComponent::class,
             MainDependencies::class
@@ -23,21 +21,15 @@ import it.codingjam.cleanweather.kotlinutils.getOrCreate
 interface MainComponent {
     fun inject(activity: MainActivity)
 
-    @Component.Builder
-    interface Builder {
-        fun build(): MainComponent
-
-        fun mainDependencies(dependencies: MainDependencies): Builder
-
-        fun domainComponent(domainComponent: DomainComponent): Builder
+    @Component.Factory
+    interface Factory {
+        fun create(
+                dependencies: MainDependencies,
+                domainComponent: DomainComponent,
+                @BindsInstance
+                permissionManager: PermissionManager
+        ): MainComponent
     }
-}
-
-@Module
-class MainModule {
-    @Provides
-    @FeatureSingleton
-    fun providePermissionManager() = PermissionManager()
 }
 
 interface MainNavigator {
@@ -52,8 +44,11 @@ interface MainDependencies {
 val ComponentHolder.mainDependencies by Inversion.of(MainDependencies::class)
 
 fun ComponentHolder.mainComponent(): MainComponent = getOrCreate {
-    DaggerMainComponent.builder()
-            .domainComponent(domainComponent())
-            .mainDependencies(mainDependencies())
-            .build()
+    println("onCreate DaggerMainComponent.factory()")
+    DaggerMainComponent.factory()
+            .create(
+                    mainDependencies(),
+                    domainComponent(),
+                    PermissionManager()
+            )
 }
