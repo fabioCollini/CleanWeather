@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         DaggerDetailComponent.factory()
-                .create((application as ComponentHolder).domainComponent)
+                .create((application as ComponentHolder).domainComponent())
                 .inject(this)
 
         setContentView(R.layout.activity_detail)

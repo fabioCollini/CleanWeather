@@ -1,12 +1,12 @@
 package it.codingjam.cleanweather.main
 
 import android.app.Activity
-import inversion.Inversion
-import inversion.InversionDef
-import inversion.of
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import inversion.Inversion
+import inversion.InversionDef
+import inversion.of
 import it.codingjam.cleanweather.domain.DomainComponent
 import it.codingjam.cleanweather.domain.FeatureSingleton
 import it.codingjam.cleanweather.domain.domainComponent
@@ -51,10 +51,9 @@ interface MainDependencies {
 @get:InversionDef
 val ComponentHolder.mainDependencies by Inversion.of(MainDependencies::class)
 
-val ComponentHolder.mainComponent: MainComponent
-    get() = getOrCreate {
-        DaggerMainComponent.builder()
-                .domainComponent(domainComponent)
-                .mainDependencies(mainDependencies())
-                .build()
-    }
+fun ComponentHolder.mainComponent(): MainComponent = getOrCreate {
+    DaggerMainComponent.builder()
+            .domainComponent(domainComponent())
+            .mainDependencies(mainDependencies())
+            .build()
+}

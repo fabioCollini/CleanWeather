@@ -1,10 +1,10 @@
 package it.codingjam.cleanweather.app
 
 import android.app.Application
-import inversion.InversionProvider
 import dagger.Binds
 import dagger.Component
 import dagger.Module
+import inversion.InversionProvider
 import it.codingjam.cleanweather.domain.DomainDependencies
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.getOrCreate
@@ -53,7 +53,7 @@ interface DomainDependenciesImpl : DomainDependencies {
 @InversionProvider
 fun ComponentHolder.provideImpl(): DomainDependencies = getOrCreate {
     DaggerDomainDependenciesImpl.factory().create(
-            (this as Application).locationComponent,
-            weatherComponent
+            (this as Application).locationComponent(),
+            weatherComponent()
     )
 }

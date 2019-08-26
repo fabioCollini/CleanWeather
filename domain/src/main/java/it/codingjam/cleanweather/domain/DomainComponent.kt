@@ -31,7 +31,6 @@ interface DomainDependencies {
 @get:InversionDef
 val ComponentHolder.domainDependencies by Inversion.of(DomainDependencies::class)
 
-val ComponentHolder.domainComponent: DomainComponent
-    get() = getOrCreate {
-        DaggerDomainComponent.factory().create(domainDependencies())
-    }
+fun ComponentHolder.domainComponent(): DomainComponent = getOrCreate {
+    DaggerDomainComponent.factory().create(domainDependencies())
+}

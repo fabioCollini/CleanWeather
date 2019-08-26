@@ -36,7 +36,6 @@ internal class LocationModule {
     fun provideLocationManager(impl: AndroidLocationManager): LocationManager = impl
 }
 
-val Application.locationComponent: LocationComponent
-    get() = getOrCreateAppComponent {
-        DaggerLocationComponentImpl.factory().create(this)
-    }
+fun Application.locationComponent(): LocationComponent = getOrCreateAppComponent {
+    DaggerLocationComponentImpl.factory().create(this)
+}

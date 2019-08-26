@@ -46,9 +46,8 @@ internal class WeatherModule {
     fun provideTemperatureRepository(impl: OpenWeatherTemperatureRepository): TemperatureRepository = impl
 }
 
-val ComponentHolder.weatherComponent: WeatherComponent
-    get() = getOrCreate {
-        DaggerWeatherComponentImpl
-                .factory()
-                .create(weatherDependencies())
-    }
+fun ComponentHolder.weatherComponent(): WeatherComponent = getOrCreate {
+    DaggerWeatherComponentImpl
+            .factory()
+            .create(weatherDependencies())
+}

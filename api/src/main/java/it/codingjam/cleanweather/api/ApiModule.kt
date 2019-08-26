@@ -32,7 +32,7 @@ internal class ApiModule {
     fun provideWeatherApi(impl: RetrofitWeatherApi): WeatherApi = impl
 }
 
-val ComponentHolder.apiComponent: ApiComponent get() = getOrCreate { DaggerApiComponent.create() }
+fun ComponentHolder.apiComponent(): ApiComponent = getOrCreate { DaggerApiComponent.create() }
 
 @InversionProvider
-fun provideImpl(componentHolder: ComponentHolder): WeatherDependencies = componentHolder.apiComponent
+fun provideImpl(componentHolder: ComponentHolder): WeatherDependencies = componentHolder.apiComponent()
