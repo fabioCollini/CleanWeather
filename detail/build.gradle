@@ -1,7 +1,6 @@
 apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -34,9 +33,6 @@ dependencies {
     implementation project(':domain')
     implementation project(':location')
     implementation project(':utils')
-
-    implementation "com.google.dagger:dagger:2.23.2"
-    kapt "com.google.dagger:dagger-compiler:2.23.2"
 
     implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'

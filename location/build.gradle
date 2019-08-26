@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -26,9 +25,6 @@ android {
 dependencies {
     api project(':domain')
     api project(':utils')
-
-    implementation "com.google.dagger:dagger:2.23.2"
-    kapt "com.google.dagger:dagger-compiler:2.23.2"
 
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2"

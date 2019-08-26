@@ -5,9 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import it.codingjam.cleanweather.domain.WeatherUseCase
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class WeatherViewModel @Inject constructor(
+class WeatherViewModel(
         private val useCase: WeatherUseCase
 ) : ViewModel() {
 

@@ -1,16 +1,12 @@
 package it.codingjam.cleanweather.detail
 
-import dagger.Component
 import it.codingjam.cleanweather.domain.DomainComponent
-import it.codingjam.cleanweather.domain.FeatureSingleton
 
-@Component(dependencies = [DomainComponent::class])
-@FeatureSingleton
 interface DetailComponent {
-    fun inject(activity: DetailActivity)
+    val detailViewModel: DetailViewModel
+}
 
-    @Component.Factory
-    interface Factory {
-        fun create(domainComponent: DomainComponent): DetailComponent
-    }
+class DetailComponentImpl(domainComponent: DomainComponent) : DetailComponent, DomainComponent by domainComponent {
+    override val detailViewModel: DetailViewModel
+        get() = DetailViewModel(weatherUseCase)
 }

@@ -2,19 +2,24 @@ package it.codingjam.cleanweather.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import javax.inject.Provider
 
 
-inline fun <reified VM : ViewModel> AppCompatActivity.viewModel(crossinline provider: () -> Provider<VM>): Lazy<VM> {
+inline fun <reified VM : ViewModel> AppCompatActivity.viewModel(crossinline provider: () -> VM): Lazy<VM> {
     return lazy {
-        ViewModelProviders.of(this, provider().factory()).get(VM::class.java)
+        val factory = object : ViewModelProvider.Factory {
+            override fun <T1 : ViewModel> create(aClass: Class<T1>): T1 {
+                val viewModel = provider()
+                return viewModel as T1
+            }
+        }
+        ViewModelProviders.of(this, factory).get(VM::class.java)
     }
 }
 
-inline fun <reified VM : ViewModel> Provider<VM>.factory(): ViewModelProvider.Factory {
+inline fun <reified VM : ViewModel> (() -> VM).factory(): ViewModelProvider.Factory {
     return object : ViewModelProvider.Factory {
         override fun <T1 : ViewModel> create(aClass: Class<T1>): T1 {
-            val viewModel = get()
+            val viewModel = invoke()
             return viewModel as T1
         }
     }

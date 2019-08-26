@@ -3,29 +3,22 @@ package it.codingjam.cleanweather.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
+import it.codingjam.cleanweather.utils.observe
 import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import it.codingjam.cleanweather.utils.*
-import javax.inject.Inject
-import javax.inject.Provider
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: WeatherViewModel by viewModel { viewModelProvider }
+    private val component by lazy { (application as ComponentHolder).mainComponent }
 
-    @Inject
-    lateinit var viewModelProvider: Provider<WeatherViewModel>
+    private val viewModel: WeatherViewModel by viewModel { component.weatherViewModel }
 
-    @Inject
-    lateinit var permissionManager: PermissionManager
+    private val permissionManager by lazy { component.permissionManager }
 
-    @Inject
-    lateinit var mainNavigator: MainNavigator
+    private val mainNavigator by lazy { component.mainNavigator }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        (application as ComponentHolder).mainComponent.inject(this)
 
         setContentView(R.layout.activity_main)
 

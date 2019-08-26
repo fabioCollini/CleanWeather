@@ -7,17 +7,15 @@ import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import it.codingjam.cleanweather.domain.LocationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import it.codingjam.cleanweather.domain.LocationManager
 import java.util.*
-import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-@LocationSingleton
-class AndroidLocationManager @Inject constructor(context: Application) : LocationManager {
+class AndroidLocationManager(context: Application) : LocationManager {
 
     private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 

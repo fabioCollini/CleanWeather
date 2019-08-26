@@ -4,40 +4,25 @@ import android.app.Activity
 import inversion.Inversion
 import inversion.InversionDef
 import inversion.of
-import dagger.Component
-import dagger.Module
-import dagger.Provides
 import it.codingjam.cleanweather.domain.DomainComponent
-import it.codingjam.cleanweather.domain.FeatureSingleton
 import it.codingjam.cleanweather.domain.domainComponent
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.getOrCreate
 
-@Component(
-        modules = [MainModule::class],
-        dependencies = [
-            DomainComponent::class,
-            MainDependencies::class
-        ])
-@FeatureSingleton
 interface MainComponent {
-    fun inject(activity: MainActivity)
-
-    @Component.Builder
-    interface Builder {
-        fun build(): MainComponent
-
-        fun mainDependencies(dependencies: MainDependencies): Builder
-
-        fun domainComponent(domainComponent: DomainComponent): Builder
-    }
+    val weatherViewModel: WeatherViewModel
+    val mainNavigator: MainNavigator
+    val permissionManager: PermissionManager
 }
 
-@Module
-class MainModule {
-    @Provides
-    @FeatureSingleton
-    fun providePermissionManager() = PermissionManager()
+private class MainComponentImpl(
+        domainComponent: DomainComponent,
+        mainDependencies: MainDependencies
+) : MainComponent, MainDependencies by mainDependencies, DomainComponent by domainComponent {
+    override val weatherViewModel: WeatherViewModel
+        get() = WeatherViewModel(weatherUseCase)
+
+    override val permissionManager by lazy { PermissionManager() }
 }
 
 interface MainNavigator {
@@ -53,8 +38,5 @@ val ComponentHolder.mainDependencies by Inversion.of(MainDependencies::class)
 
 val ComponentHolder.mainComponent: MainComponent
     get() = getOrCreate {
-        DaggerMainComponent.builder()
-                .domainComponent(domainComponent)
-                .mainDependencies(mainDependencies())
-                .build()
+        MainComponentImpl(domainComponent, mainDependencies())
     }

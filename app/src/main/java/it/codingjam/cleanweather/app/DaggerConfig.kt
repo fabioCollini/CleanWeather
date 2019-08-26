@@ -2,57 +2,32 @@ package it.codingjam.cleanweather.app
 
 import android.app.Application
 import inversion.InversionProvider
-import dagger.Binds
-import dagger.Component
-import dagger.Module
 import it.codingjam.cleanweather.domain.DomainDependencies
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
 import it.codingjam.cleanweather.kotlinutils.getOrCreate
 import it.codingjam.cleanweather.main.MainDependencies
-import it.codingjam.cleanweather.main.MainNavigator
 import it.codingjam.cleanweather.position.LocationComponent
 import it.codingjam.cleanweather.position.locationComponent
 import it.codingjam.cleanweather.weather.WeatherComponent
 import it.codingjam.cleanweather.weather.weatherComponent
-import javax.inject.Scope
 
-@Scope
-annotation class AppSingleton
-
-@Module
-interface MainDependenciesModule {
-    @Binds
-    fun provideNavigator(impl: MainNavigatorImpl): MainNavigator
+private class MainDependenciesImpl : MainDependencies {
+    override val mainNavigator by lazy { MainNavigatorImpl() }
 }
-
-@Component(
-    modules = [
-        MainDependenciesModule::class
-    ]
-)
-@AppSingleton
-interface MainDependenciesImpl : MainDependencies
 
 @InversionProvider
 fun ComponentHolder.provideMainDependenciesImpl(): MainDependencies = getOrCreate {
-    DaggerMainDependenciesImpl.create()
+    MainDependenciesImpl()
 }
 
-@Component(dependencies = [LocationComponent::class, WeatherComponent::class])
-interface DomainDependenciesImpl : DomainDependencies {
-
-    @Component.Factory
-    interface Factory {
-        fun create(
-            locationComponent: LocationComponent,
-            weatherComponent: WeatherComponent
-        ): DomainDependenciesImpl
-    }
-}
+private class DomainDependenciesImpl(
+        locationComponent: LocationComponent,
+        weatherComponent: WeatherComponent
+) : DomainDependencies, LocationComponent by locationComponent, WeatherComponent by weatherComponent
 
 @InversionProvider
 fun ComponentHolder.provideImpl(): DomainDependencies = getOrCreate {
-    DaggerDomainDependenciesImpl.factory().create(
+    DomainDependenciesImpl(
             (this as Application).locationComponent,
             weatherComponent
     )

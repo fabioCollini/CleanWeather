@@ -4,10 +4,8 @@ import com.codingjam.cleanweather.entities.Temperature
 import it.codingjam.cleanweather.domain.TemperatureRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import javax.inject.Inject
 
-@WeatherSingleton
-class OpenWeatherTemperatureRepository @Inject constructor(
+class OpenWeatherTemperatureRepository(
         private val api: WeatherApi
 ) : TemperatureRepository {
 
