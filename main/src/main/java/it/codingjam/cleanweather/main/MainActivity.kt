@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val component by lazy { (application as ComponentHolder).mainComponent }
+    private val component by lazy { (application as ComponentHolder).mainComponent() }
 
     private val viewModel: WeatherViewModel by viewModel { component.weatherViewModel }
 

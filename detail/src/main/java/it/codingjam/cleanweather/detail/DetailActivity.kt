@@ -10,12 +10,8 @@ import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
-    DaggerDetailComponent.factory()
-    .create((application as ComponentHolder).domainComponent())
-    .inject(this)
-
     private val component by lazy {
-        DetailComponentImpl((application as ComponentHolder).domainComponent)
+        DetailComponentImpl((application as ComponentHolder).domainComponent())
     }
 
     private val viewModel: DetailViewModel by viewModel { viewModelProvider }
