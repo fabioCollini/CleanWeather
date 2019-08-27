@@ -10,7 +10,7 @@ interface ApiComponent : WeatherDependencies {
     override val weatherApi: WeatherApi
 }
 
-internal class ApiComponentImpl : ApiComponent {
+private class ApiComponentImpl : ApiComponent {
     private val weatherApiSpec by lazy {
         RetrofitFactory.createService<WeatherApiSpec>("https://api.openweathermap.org/data/2.5/")
     }
