@@ -4,20 +4,16 @@ import java.util.*
 
 interface ComponentHolder {
     operator fun <C : Any> get(componentClass: Class<C>): C?
-    fun <C : Any> createComponent(componentClass: Class<C>, component: C)
+    fun <C : Any> put(componentClass: Class<C>, component: C)
     fun clearComponents()
 }
 
-inline fun <C : Any> ComponentHolder.getOrCreate(componentClass: Class<C>, componentFactory: () -> C): C {
-    val value = get(componentClass)
-    return if (value == null) {
-        val answer = componentFactory()
-        createComponent(componentClass, answer)
-        answer
-    } else {
-        value
-    }
-}
+inline fun <C : Any> ComponentHolder.getOrCreate(componentClass: Class<C>, componentFactory: () -> C): C =
+        get(componentClass) ?: synchronized(componentClass) {
+            val answer = componentFactory()
+            put(componentClass, answer)
+            answer
+        }
 
 inline fun <reified C : Any> ComponentHolder.getOrCreate(noinline componentFactory: () -> C): C =
         getOrCreate(C::class.java, componentFactory)
@@ -39,7 +35,7 @@ class ComponentsMap : ComponentHolder {
         return moduleComponents[componentClass] as C?
     }
 
-    override fun <C : Any> createComponent(componentClass: Class<C>, component: C) {
+    override fun <C : Any> put(componentClass: Class<C>, component: C) {
         moduleComponents[componentClass] = component
     }
 
