@@ -13,19 +13,16 @@ import javax.inject.Scope
 @Scope
 internal annotation class LocationSingleton
 
-interface LocationComponent {
-    val locationManager: LocationManager
-}
-
 @Component(
         modules = [LocationModule::class]
 )
 @LocationSingleton
-interface LocationComponentImpl : LocationComponent {
+interface LocationComponent {
+    val locationManager: LocationManager
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance app: Application): LocationComponentImpl
+        fun create(@BindsInstance app: Application): LocationComponent
     }
 }
 
@@ -38,5 +35,5 @@ internal class LocationModule {
 }
 
 fun ComponentHolderApp.locationComponent(): LocationComponent = getOrCreate {
-    DaggerLocationComponentImpl.factory().create(this)
+    DaggerLocationComponent.factory().create(this)
 }

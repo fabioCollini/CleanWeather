@@ -14,16 +14,13 @@ import javax.inject.Scope
 @Scope
 internal annotation class WeatherSingleton
 
-interface WeatherComponent {
-    val temperatureRepository: TemperatureRepository
-}
-
 @Component(
         modules = [WeatherModule::class],
         dependencies = [WeatherDependencies::class]
 )
 @WeatherSingleton
-interface WeatherComponentImpl : WeatherComponent {
+interface WeatherComponent {
+    val temperatureRepository: TemperatureRepository
 
     @Component.Factory
     interface Factory {
@@ -47,7 +44,7 @@ internal class WeatherModule {
 }
 
 fun ComponentHolder.weatherComponent(): WeatherComponent = getOrCreate {
-    DaggerWeatherComponentImpl
+    DaggerWeatherComponent
             .factory()
             .create(weatherDependencies())
 }

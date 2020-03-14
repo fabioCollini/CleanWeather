@@ -39,6 +39,10 @@ fun ComponentHolder.provideMainDependenciesImpl(): MainDependencies = getOrCreat
     DaggerMainDependenciesImpl.create()
 }
 
+@Scope
+annotation class DomainDependenciesSingleton
+
+@DomainDependenciesSingleton
 @Component(dependencies = [LocationComponent::class, WeatherComponent::class])
 interface DomainDependenciesImpl : DomainDependencies {
 

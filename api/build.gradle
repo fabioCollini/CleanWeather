@@ -5,11 +5,11 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation project(':weather')
 
-    implementation "com.google.dagger:dagger:2.24"
-    kapt "com.google.dagger:dagger-compiler:2.24"
+    implementation "com.google.dagger:dagger:2.27"
+    kapt "com.google.dagger:dagger-compiler:2.27"
 
-    implementation 'com.github.fabioCollini.inversion:inversionLib:0.2'
-    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.2'
+    implementation 'com.github.fabioCollini.inversion:inversionLib:0.3.1'
+    kapt 'com.github.fabioCollini.inversion:inversionCodGen:0.3.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.squareup.retrofit2:retrofit:2.6.0"
