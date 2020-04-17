@@ -6,6 +6,7 @@ interface ComponentHolder {
     operator fun <C : Any> get(componentClass: Class<C>): C?
     fun <C : Any> put(componentClass: Class<C>, component: C)
     fun clearComponents()
+    fun <C : Any> castComponent(): C
 }
 
 inline fun <C : Any> ComponentHolder.getOrCreate(componentClass: Class<C>, componentFactory: () -> C): C =
@@ -41,5 +42,9 @@ class ComponentsMap : ComponentHolder {
 
     override fun clearComponents() {
         moduleComponents.clear()
+    }
+
+    override fun <C : Any> castComponent(): C {
+        TODO("Not yet implemented")
     }
 }

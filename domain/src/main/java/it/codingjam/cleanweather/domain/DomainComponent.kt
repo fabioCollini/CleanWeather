@@ -11,11 +11,13 @@ import javax.inject.Scope
 @Scope
 internal annotation class DomainSingleton
 
-@DomainSingleton
-@Component(dependencies = [DomainDependencies::class])
 interface DomainComponent {
     val weatherUseCase: WeatherUseCase
+}
 
+@DomainSingleton
+@Component(dependencies = [DomainDependencies::class])
+interface DomainComponentImpl: DomainComponent {
     @Component.Factory
     interface Factory {
         fun create(domainDependencies: DomainDependencies): DomainComponent
@@ -32,5 +34,5 @@ interface DomainDependencies {
 val ComponentHolder.domainDependencies by Inversion.of(DomainDependencies::class)
 
 fun ComponentHolder.domainComponent(): DomainComponent = getOrCreate {
-    DaggerDomainComponent.factory().create(domainDependencies())
+    DaggerDomainComponentImpl.factory().create(domainDependencies())
 }

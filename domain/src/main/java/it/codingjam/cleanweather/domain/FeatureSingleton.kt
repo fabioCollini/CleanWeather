@@ -1,6 +1,5 @@
 package it.codingjam.cleanweather.domain
 
-import javax.inject.Scope
+import javax.inject.Singleton
 
-@Scope
-annotation class FeatureSingleton
+typealias FeatureSingleton = Singleton

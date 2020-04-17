@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (application as ComponentHolder).mainComponent().inject(this)
+        (application as ComponentHolder).castComponent<MainComponent>().inject(this)
 
         setContentView(R.layout.activity_main)
 

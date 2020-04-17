@@ -6,11 +6,14 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import it.codingjam.cleanweather.domain.OpenForTesting
+import javax.inject.Inject
+import javax.inject.Singleton
 
 private const val PERMISSIONS_REQUEST_LOCATION = 123
 
+@Singleton
 @OpenForTesting
-class PermissionManager {
+class PermissionManager @Inject constructor() {
 
     fun checkLocationPermission(activity: Activity): Boolean {
         return if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
