@@ -3,25 +3,13 @@ package it.codingjam.cleanweather.domain
 import inversion.Inversion
 import inversion.InversionDef
 import inversion.of
-import dagger.Component
 import it.codingjam.cleanweather.kotlinutils.ComponentHolder
-import it.codingjam.cleanweather.kotlinutils.getOrCreate
-import javax.inject.Scope
+import javax.inject.Singleton
 
-@Scope
-internal annotation class DomainSingleton
+typealias DomainSingleton = Singleton
 
 interface DomainComponent {
     val weatherUseCase: WeatherUseCase
-}
-
-@DomainSingleton
-@Component(dependencies = [DomainDependencies::class])
-interface DomainComponentImpl: DomainComponent {
-    @Component.Factory
-    interface Factory {
-        fun create(domainDependencies: DomainDependencies): DomainComponent
-    }
 }
 
 interface DomainDependencies {
@@ -33,6 +21,4 @@ interface DomainDependencies {
 @get:InversionDef
 val ComponentHolder.domainDependencies by Inversion.of(DomainDependencies::class)
 
-fun ComponentHolder.domainComponent(): DomainComponent = getOrCreate {
-    DaggerDomainComponentImpl.factory().create(domainDependencies())
-}
+fun ComponentHolder.domainComponent(): DomainComponent = castComponent()
