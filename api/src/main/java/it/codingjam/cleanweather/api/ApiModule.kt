@@ -1,26 +1,14 @@
 package it.codingjam.cleanweather.api
 
-import inversion.InversionProvider
-import dagger.Component
 import dagger.Module
 import dagger.Provides
-import it.codingjam.cleanweather.kotlinutils.ComponentHolder
-import it.codingjam.cleanweather.kotlinutils.getOrCreate
 import it.codingjam.cleanweather.weather.WeatherApi
-import it.codingjam.cleanweather.weather.WeatherDependencies
-import javax.inject.Scope
+import javax.inject.Singleton
 
-@Scope
-internal annotation class ApiSingleton
-
-@Component(modules = [ApiModule::class])
-@ApiSingleton
-interface ApiComponent : WeatherDependencies {
-    override val weatherApi: WeatherApi
-}
+typealias ApiSingleton = Singleton
 
 @Module
-internal class ApiModule {
+class ApiModule {
 
     @ApiSingleton
     @Provides
@@ -29,10 +17,5 @@ internal class ApiModule {
 
     @ApiSingleton
     @Provides
-    fun provideWeatherApi(impl: RetrofitWeatherApi): WeatherApi = impl
+    internal fun provideWeatherApi(impl: RetrofitWeatherApi): WeatherApi = impl
 }
-
-fun ComponentHolder.apiComponent(): ApiComponent = getOrCreate { DaggerApiComponent.create() }
-
-@InversionProvider
-fun provideImpl(componentHolder: ComponentHolder): WeatherDependencies = componentHolder.apiComponent()

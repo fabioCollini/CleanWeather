@@ -18,7 +18,7 @@ interface WeatherApiSpec {
 }
 
 @ApiSingleton
-class RetrofitWeatherApi @Inject constructor(
+internal class RetrofitWeatherApi @Inject constructor(
         private val api: WeatherApiSpec
 ) : WeatherApi {
 
