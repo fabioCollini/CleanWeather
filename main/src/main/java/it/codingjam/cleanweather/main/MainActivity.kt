@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         root.setOnClickListener {
-            mainNavigator.openDetail(this)
+            mainNavigator.openDetail()
         }
 
         viewModel.state.observe(this) {

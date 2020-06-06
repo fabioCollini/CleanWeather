@@ -1,15 +1,17 @@
 package it.codingjam.cleanweather.app
 
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Intent
+import dagger.hilt.android.scopes.ActivityScoped
+import it.codingjam.cleanweather.detail.DetailActivity
 import it.codingjam.cleanweather.main.MainNavigator
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class MainNavigatorImpl @Inject constructor(): MainNavigator {
-    override fun openDetail(activity: Activity) {
-        activity.startActivity(Intent().setComponent(ComponentName(activity.packageName, "it.codingjam.cleanweather.detail.DetailActivity")))
+@ActivityScoped
+class MainNavigatorImpl @Inject constructor(
+        private val activity: Activity
+) : MainNavigator {
+    override fun openDetail() {
+        activity.startActivity(Intent(activity, DetailActivity::class.java))
     }
 }

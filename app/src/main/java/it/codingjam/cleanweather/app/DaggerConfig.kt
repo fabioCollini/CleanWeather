@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ApplicationComponent
 import it.codingjam.cleanweather.api.RetrofitFactory
 import it.codingjam.cleanweather.api.RetrofitWeatherApi
@@ -15,11 +16,15 @@ import it.codingjam.cleanweather.weather.WeatherApi
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
-interface MainDependenciesModule {
+@InstallIn(ActivityComponent::class)
+interface NavigatorModule {
     @Binds
     fun MainNavigatorImpl.provideNavigator(): MainNavigator
+}
 
+@Module
+@InstallIn(ApplicationComponent::class)
+interface MainDependenciesModule {
     @Binds
     fun RetrofitWeatherApi.provideWeatherApi(): WeatherApi
 
