@@ -1,16 +1,11 @@
 package it.codingjam.cleanweather.detail
 
-import dagger.Component
-import it.codingjam.cleanweather.domain.DomainComponent
-import it.codingjam.cleanweather.domain.FeatureSingleton
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
-@Component(dependencies = [DomainComponent::class])
-@FeatureSingleton
+@EntryPoint
+@InstallIn(ApplicationComponent::class)
 interface DetailComponent {
     fun inject(activity: DetailActivity)
-
-    @Component.Factory
-    interface Factory {
-        fun create(domainComponent: DomainComponent): DetailComponent
-    }
 }

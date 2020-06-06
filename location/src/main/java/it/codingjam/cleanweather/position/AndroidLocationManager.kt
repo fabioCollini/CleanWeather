@@ -12,11 +12,12 @@ import kotlinx.coroutines.withContext
 import it.codingjam.cleanweather.domain.LocationManager
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-@LocationSingleton
+@Singleton
 class AndroidLocationManager @Inject constructor(context: Application) : LocationManager {
 
     private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)

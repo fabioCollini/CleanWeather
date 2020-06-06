@@ -2,13 +2,14 @@ package it.codingjam.cleanweather.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import it.codingjam.cleanweather.kotlinutils.ComponentHolder
+import dagger.hilt.android.AndroidEntryPoint
 import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import it.codingjam.cleanweather.utils.*
 import javax.inject.Inject
 import javax.inject.Provider
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: WeatherViewModel by viewModel { viewModelProvider }
@@ -24,8 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        (application as ComponentHolder).castComponent<MainComponent>().inject(this)
 
         setContentView(R.layout.activity_main)
 

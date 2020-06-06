@@ -6,6 +6,7 @@ import it.codingjam.cleanweather.weather.WeatherApi
 import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Inject
+import javax.inject.Singleton
 
 const val OPEN_WEATHER_APP_ID = "90e68d358063403c485caacb28cd5727"
 
@@ -17,8 +18,8 @@ interface WeatherApiSpec {
     suspend fun forecast(@Query("lat") lat: Double, @Query("lon") lon: Double): Forecast
 }
 
-@ApiSingleton
-internal class RetrofitWeatherApi @Inject constructor(
+@Singleton
+class RetrofitWeatherApi @Inject constructor(
         private val api: WeatherApiSpec
 ) : WeatherApi {
 

@@ -2,8 +2,7 @@ package it.codingjam.cleanweather.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import it.codingjam.cleanweather.domain.domainComponent
-import it.codingjam.cleanweather.kotlinutils.ComponentHolder
+import dagger.hilt.EntryPoints
 import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_detail.*
 import it.codingjam.cleanweather.utils.observe
@@ -20,8 +19,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DaggerDetailComponent.factory()
-                .create((application as ComponentHolder).domainComponent())
+        EntryPoints.get(application, DetailComponent::class.java)
                 .inject(this)
 
         setContentView(R.layout.activity_detail)
