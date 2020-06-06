@@ -25,6 +25,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 
     buildTypes {
         release {
@@ -38,12 +41,13 @@ dependencies {
     api project(':domain')
     api project(':utils')
 
-    implementation "com.google.dagger:dagger:2.28"
-    kapt "com.google.dagger:dagger-compiler:2.28"
-    implementation 'com.google.dagger:hilt-android:2.28-alpha'
-    kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+    kapt Libs.hiltAndroidCompiler
+    implementation Libs.hiltAndroid
+    implementation Libs.hiltCommon
+    implementation Libs.hiltViewModel
+    kapt Libs.hiltCompiler
 
-
+    implementation Libs.activityKtx
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 

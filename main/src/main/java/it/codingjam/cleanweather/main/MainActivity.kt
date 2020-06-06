@@ -1,21 +1,17 @@
 package it.codingjam.cleanweather.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import it.codingjam.cleanweather.utils.viewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import it.codingjam.cleanweather.utils.*
 import javax.inject.Inject
-import javax.inject.Provider
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: WeatherViewModel by viewModel { viewModelProvider }
-
-    @Inject
-    lateinit var viewModelProvider: Provider<WeatherViewModel>
+    private val viewModel: WeatherViewModel by viewModels()
 
     @Inject
     lateinit var permissionManager: PermissionManager
