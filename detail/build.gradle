@@ -1,4 +1,4 @@
-apply plugin: 'com.android.dynamic-feature'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -20,6 +20,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 
     buildTypes {
         release {
@@ -29,18 +32,17 @@ android {
 }
 
 dependencies {
-    implementation project(':app')
     implementation project(':api')
     implementation project(':weather')
     implementation project(':domain')
     implementation project(':location')
     implementation project(':utils')
 
-    implementation "com.google.dagger:dagger:2.28"
-    kapt "com.google.dagger:dagger-compiler:2.28"
-    implementation Libs.hiltAndroid
     kapt Libs.hiltAndroidCompiler
-
+    implementation Libs.hiltAndroid
+    implementation Libs.hiltCommon
+    implementation Libs.hiltViewModel
+    kapt Libs.hiltCompiler
 
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
