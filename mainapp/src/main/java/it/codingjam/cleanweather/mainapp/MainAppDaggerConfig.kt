@@ -39,8 +39,8 @@ object MainModuleFake {
     @Provides
     @Singleton
     fun provideNavigator() = object : MainNavigator {
-        override fun openDetail(activity: Activity) {
-            Toast.makeText(activity, "Layout clicked!", Toast.LENGTH_LONG).show()
+        override fun openDetail() {
+//            Toast.makeText(activity, "Layout clicked!", Toast.LENGTH_LONG).show()
         }
     }
 }
