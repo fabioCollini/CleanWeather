@@ -1,1 +1,1 @@
-include ':domain', ':api', ':weather', ':entities', ':app', ':location', ':main', ':detail', ':utils', ':mainapp', ':kotlinUtils'
+include ':domain', ':api', ':weather', ':entities', ':app', ':location', ':main', ':detail', ':utils', ':mainapp'
