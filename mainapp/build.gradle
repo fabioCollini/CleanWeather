@@ -38,20 +38,20 @@ android {
 dependencies {
     implementation project(':main')
 
-    implementation "com.google.dagger:dagger:2.28"
-    kapt "com.google.dagger:dagger-compiler:2.28"
+    implementation Libs.dagger
+    kapt Libs.daggerCompiler
     implementation Libs.hiltAndroid
     kapt Libs.hiltAndroidCompiler
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation "androidx.test:core:1.2.0"
-    androidTestImplementation "androidx.test:rules:1.2.0"
-    androidTestImplementation "org.mockito:mockito-android:2.28.2"
-    androidTestImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+    testImplementation Libs.junit
+    androidTestImplementation Libs.testRunner
+    androidTestImplementation Libs.espresso
+    androidTestImplementation Libs.testCore
+    androidTestImplementation Libs.testRules
+    androidTestImplementation Libs.mockitoAndroid
+    androidTestImplementation Libs.mockitoKotlin
     androidTestImplementation Libs.hiltAndroidTesting
     kaptAndroidTest Libs.hiltAndroidCompiler
 }

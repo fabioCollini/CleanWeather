@@ -44,17 +44,17 @@ dependencies {
     implementation Libs.hiltViewModel
     kapt Libs.hiltCompiler
 
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation Libs.appCompat
+    implementation Libs.lifecycleRuntime
+    implementation Libs.lifecycleExtensions
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6"
+    implementation Libs.coroutinesAndroid
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation Libs.constraintLayout
+    implementation Libs.lifecycleViewModelKtx
 
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation Libs.junit
+    androidTestImplementation Libs.testRunner
+    androidTestImplementation Libs.espresso
 }

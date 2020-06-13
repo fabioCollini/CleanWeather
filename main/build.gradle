@@ -48,15 +48,15 @@ dependencies {
     kapt Libs.hiltCompiler
 
     implementation Libs.activityKtx
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation Libs.lifecycleRuntime
+    implementation Libs.lifecycleExtensions
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6"
+    implementation Libs.coroutinesAndroid
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    api 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    api Libs.appCompat
+    implementation Libs.constraintLayout
+    implementation Libs.lifecycleViewModelKtx
 
-    testImplementation 'junit:junit:4.13'
+    testImplementation Libs.junit
 }
