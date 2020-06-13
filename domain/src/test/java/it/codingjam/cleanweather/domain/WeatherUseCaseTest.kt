@@ -5,8 +5,9 @@ import assertk.assertions.isEqualTo
 import com.codingjam.cleanweather.entities.City
 import com.codingjam.cleanweather.entities.Location
 import com.codingjam.cleanweather.entities.Temperature
-import io.mockk.coEvery
-import io.mockk.mockk
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
@@ -16,21 +17,21 @@ private val LOCATION = Location(LAT, LON)
 
 class WeatherUseCaseTest {
 
-    val locationManager: LocationManager = mockk()
+    private val locationManager: LocationManager = mock()
 
-    val repository: TemperatureRepository = mockk()
+    private val repository: TemperatureRepository = mock()
 
-    val useCase = WeatherUseCase(locationManager, repository)
+    private val useCase = WeatherUseCase(locationManager, repository)
 
     @Test
-    fun retrieveCityData() {
-        coEvery { locationManager.getLastLocation() } returns LOCATION
-        coEvery { locationManager.getCities(LOCATION) } returns
+    fun retrieveCityData() = runBlocking {
+        whenever(locationManager.getLastLocation()) doReturn LOCATION
+        whenever(locationManager.getCities(LOCATION)) doReturn
                 listOf(City("Firenze", "IT"))
-        coEvery { repository.getTemperature(LAT, LON) } returns
+        whenever(repository.getTemperature(LAT, LON)) doReturn
                 Temperature(10, 8, 20)
 
-        val cityData = runBlocking { useCase.getCityData() }
+        val cityData = useCase.getCityData()
 
         assert(cityData).isEqualTo("Firenze (IT) \n 10º min 8º max 20º")
     }

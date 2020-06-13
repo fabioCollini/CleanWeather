@@ -18,7 +18,7 @@ dependencies {
 
     testImplementation Libs.junit
     testImplementation Libs.assertK
-    testImplementation Libs.mockk
+    testImplementation Libs.mockitoKotlin
 }
 
 sourceSets {

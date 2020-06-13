@@ -12,7 +12,6 @@ object Libs {
     private const val constraintLayoutVersion = "1.1.3"
     private const val androidTestVersion = "1.2.0"
     private const val espressoVersion = "3.2.0"
-    private const val mockkVersion = "1.8.13.kotlin13"
     private const val playServicesVersion = "17.0.0"
     private const val mockitoVersion = "2.28.2"
     private const val mockitoKotlinVersion = "2.2.0"
@@ -40,7 +39,6 @@ object Libs {
 
     const val junit = "junit:junit:$junitVersion"
     const val assertK = "com.willowtreeapps.assertk:assertk:$assertkVersion"
-    const val mockk = "io.mockk:mockk:$mockkVersion"
     const val retrofitMock = "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     const val testRunner = "androidx.test:runner:$androidTestVersion"
