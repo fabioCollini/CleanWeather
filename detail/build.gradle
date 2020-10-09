@@ -38,11 +38,11 @@ dependencies {
     implementation project(':location')
     implementation project(':utils')
 
-    kapt Libs.hiltAndroidCompiler
     implementation Libs.hiltAndroid
-    implementation Libs.hiltCommon
+    implementation Libs.hiltAndroidXCommon
     implementation Libs.hiltViewModel
     kapt Libs.hiltCompiler
+    kapt Libs.hiltAndroidXCompiler
 
     implementation Libs.appCompat
     implementation Libs.lifecycleRuntime

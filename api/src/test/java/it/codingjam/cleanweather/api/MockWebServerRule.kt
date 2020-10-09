@@ -4,6 +4,8 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 import okio.Okio
+import okio.buffer
+import okio.source
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import java.nio.charset.StandardCharsets
@@ -24,7 +26,7 @@ class MockWebServerRule : TestWatcher() {
 
     fun enqueueResponse(fileName: String, headers: Map<String, String> = emptyMap()) {
         val inputStream = javaClass.classLoader.getResourceAsStream("api-response/$fileName")
-        val source = Okio.buffer(Okio.source(inputStream))
+        val source = inputStream.source().buffer()
         val mockResponse = MockResponse()
         headers.forEach { key, value -> mockResponse.addHeader(key, value) }
         mockWebServer.enqueue(mockResponse

@@ -4,6 +4,7 @@ import assertk.assert
 import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import org.junit.Rule
 import org.junit.Test
 
@@ -14,7 +15,7 @@ class WeatherApiTest {
     @get:Rule
     val mockWebServer = MockWebServerRule()
 
-    private var api: WeatherApiSpec = RetrofitFactory.createService(mockWebServer.url)
+    private var api: WeatherApiSpec = RetrofitFactory.createService(OkHttpClient.Builder().build(), mockWebServer.url)
 
     @Test
     fun shouldDownloadCurrentWeather() {

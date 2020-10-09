@@ -27,6 +27,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -39,9 +43,11 @@ dependencies {
     implementation project(':main')
 
     implementation Libs.dagger
-    kapt Libs.daggerCompiler
+    implementation Libs.hiltAndroidXCommon
     implementation Libs.hiltAndroid
-    kapt Libs.hiltAndroidCompiler
+    implementation Libs.hiltViewModel
+    kapt Libs.hiltCompiler
+    kapt Libs.hiltAndroidXCompiler
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
@@ -53,5 +59,5 @@ dependencies {
     androidTestImplementation Libs.mockitoAndroid
     androidTestImplementation Libs.mockitoKotlin
     androidTestImplementation Libs.hiltAndroidTesting
-    kaptAndroidTest Libs.hiltAndroidCompiler
+    kaptAndroidTest Libs.hiltCompiler
 }

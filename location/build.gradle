@@ -31,7 +31,7 @@ dependencies {
     implementation Libs.dagger
     kapt Libs.daggerCompiler
     implementation Libs.hiltAndroid
-    kapt Libs.hiltAndroidCompiler
+    kapt Libs.hiltCompiler
 
     implementation Libs.playServicesLocation
     api Libs.coroutinesCore
