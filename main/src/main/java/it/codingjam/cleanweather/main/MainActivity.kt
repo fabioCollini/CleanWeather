@@ -3,6 +3,7 @@ package it.codingjam.cleanweather.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import it.codingjam.cleanweather.utils.*
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         if (permissionManager.checkLocationPermission(this)) {
             viewModel.load()
         }
+        println("creating fragment...")
+        val fragment = MyFragment().apply{
+            arguments = bundleOf("test" to "abc")
+        }
+        supportFragmentManager.beginTransaction().add(R.id.container, fragment, "tag").commitNow()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

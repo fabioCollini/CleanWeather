@@ -18,6 +18,7 @@ object Libs {
 
     const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
     const val activityKtx = "androidx.activity:activity-ktx:$appCompatVersion"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:1.2.5"
 
     const val dagger = "com.google.dagger:dagger:$daggerVersion"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"

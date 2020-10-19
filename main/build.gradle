@@ -48,6 +48,7 @@ dependencies {
     kapt Libs.hiltAndroidXCompiler
 
     implementation Libs.activityKtx
+    implementation Libs.fragmentKtx
     implementation Libs.lifecycleRuntime
     implementation Libs.lifecycleExtensions
 
